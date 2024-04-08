@@ -1,17 +1,3 @@
-En este repositorio centralizaremos toda la información relativa a los **Proyectos de Desarrollo de Aplicaciones Web del I.E.S Alixar**.
-Al continuación encontraremos los **apellidos y nombre** del alumno/a junto al **título de su proyecto**. El enlace nos dará acceso al repositorio del proyecto (no a la página GitHub del usuario).
-
-En este repositorio se debe incluir la documentación especificada en [Requerimientos y criterios a seguir en el desarrollo de los proyectos](https://github.com/iesalixar/plantilla_proyecto_iesalixar/wiki/a.---Criterios-comunes-para-todos-los-proyectos), así como las indicaciones que el tutor haya podido ir a realizando a lo largo del desarrollo del mismo.
-
-El desarrollo de toda Aplicación Web requiere seguir un [proceso estructurado](https://github.com/iesalixar/plantilla_proyecto_iesalixar/wiki/w1.--PROCESO-ESTRUCTURADO-PARA-DESARROLLO-DE-APLICACIONES-WEB), este  de contenido de la wiki te puede ayudar.
-
-
----
-
-**Los párrafos anteriores son informativos y no deben aparecer en el reposotirio de los alumnos.**
-
----
-
 # Título del Proyecto
 
 #### Curso Escolar 2023-2024
@@ -44,7 +30,7 @@ Elegida por su facilidad de uso, su naturaleza relacional y su escalabilidad.
 ## Requisitos funcionales de la aplicación
 
 La aplicación debe ser capaz de permitir las siguientes funcionalidades: 
-
+---
 RF01 - El sistema debe permitir un login
 RF02 - El sistema debe permitir un logout
 RF03 - El sistema debe permitir el registro de usuarios
@@ -65,7 +51,7 @@ RF17  - El sistema debe permitir que el usuario creador de un hilo marque como s
 RF18 - El sistema debe permitir que un usuario bloquee a otro usuario para no recibir sus comunicaciones, reportarlo a él o a algún mensaje concreto.
 RF19 - Sistema de usuarios Fiables. Usuarios veteranos o con varias respuestas correctas registradas serán distinguidos con insignias.
 RF20 - El administrador puede consultar estadísticas referentes a la resolución de hilos en función de marcas y modelos.
-
+---
 ## Estructura del Proyecto
 
 En este apartado el alumno explicará el contenido del repositorio y de todas las carpetas relevantes del mismo. Para facilitar la gestión de la entrega, todo el código y documentación debe estar en este repositorio.
