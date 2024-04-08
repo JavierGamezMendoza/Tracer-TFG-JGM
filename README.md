@@ -30,28 +30,28 @@ Elegida por su facilidad de uso, su naturaleza relacional y su escalabilidad.
 ## Requisitos funcionales de la aplicación
 
 La aplicación debe ser capaz de permitir las siguientes funcionalidades: 
----
-RF01 - El sistema debe permitir un login
-RF02 - El sistema debe permitir un logout
-RF03 - El sistema debe permitir el registro de usuarios
-RF04 - El sistema debe permitir editar el perfil de usuario. 
-RF05 - El sistema debe permitir añadir vehículos (Administrador)
-RF06 - El sistema debe permitir crear un hilo dentro de un vehículo
-RF07 - El sistema debe permitir el seguimiento de hilos y vehículos (añadir a favoritos)
-RF08 - El sistema debe permitir leer y responder en un hilo (NO a tiempo real, tipo foro)
-RF09 - El sistema debe permitir concluir un hilo (Creador y Administrador)
-RF10 - El sistema debe permitir ver el listado general de vehículos/hilos de un vehículo.
-RF11 - El sistema debe permitir que el administrador elimine comentarios ofensivos.
-RF12 - El sistema debe permitir el veto de usuarios problemáticos de la aplicación.
-RF13 - El sistema debe permitir la búsqueda de vehículos por nombre y el filtrado por marca, año, etc.
-RF14  - El sistema debe permitir el seguimiento de usuarios concretos (añadir a favoritos).
-RF15 - El sistema debe permitir un feed donde se muestre contenido de interés/favoritos ordenado por antigüedad.
-RF16  - El sistema debe permitir buscar usuarios por nombre.
-RF17  - El sistema debe permitir que el usuario creador de un hilo marque como solución la respuesta de otro usuario en su hilo, esta acción concluye el hilo.
-RF18 - El sistema debe permitir que un usuario bloquee a otro usuario para no recibir sus comunicaciones, reportarlo a él o a algún mensaje concreto.
-RF19 - Sistema de usuarios Fiables. Usuarios veteranos o con varias respuestas correctas registradas serán distinguidos con insignias.
-RF20 - El administrador puede consultar estadísticas referentes a la resolución de hilos en función de marcas y modelos.
----
+
+- RF01 - El sistema debe permitir un login
+- RF02 - El sistema debe permitir un logout
+- RF03 - El sistema debe permitir el registro de usuarios
+- RF04 - El sistema debe permitir editar el perfil de usuario. 
+- RF05 - El sistema debe permitir añadir vehículos (Administrador)
+- RF06 - El sistema debe permitir crear un hilo dentro de un vehículo
+- RF07 - El sistema debe permitir el seguimiento de hilos y vehículos (añadir a favoritos)
+- RF08 - El sistema debe permitir leer y responder en un hilo (NO a tiempo real, tipo foro)
+- RF09 - El sistema debe permitir concluir un hilo (Creador y Administrador)
+- RF10 - El sistema debe permitir ver el listado general de vehículos/hilos de un vehículo.
+- RF11 - El sistema debe permitir que el administrador elimine comentarios ofensivos.
+- RF12 - El sistema debe permitir el veto de usuarios problemáticos de la aplicación.
+- RF13 - El sistema debe permitir la búsqueda de vehículos por nombre y el filtrado por marca, año, etc.
+- RF14  - El sistema debe permitir el seguimiento de usuarios concretos (añadir a favoritos).
+- RF15 - El sistema debe permitir un feed donde se muestre contenido de interés/favoritos ordenado por antigüedad.
+- RF16  - El sistema debe permitir buscar usuarios por nombre.
+- RF17  - El sistema debe permitir que el usuario creador de un hilo marque como solución la respuesta de otro usuario en su hilo, esta acción concluye el hilo.
+- RF18 - El sistema debe permitir que un usuario bloquee a otro usuario para no recibir sus comunicaciones, reportarlo a él o a algún mensaje concreto.
+- RF19 - Sistema de usuarios Fiables. Usuarios veteranos o con varias respuestas correctas registradas serán distinguidos con insignias.
+- RF20 - El administrador puede consultar estadísticas referentes a la resolución de hilos en función de marcas y modelos.
+
 ## Estructura del Proyecto
 
 En este apartado el alumno explicará el contenido del repositorio y de todas las carpetas relevantes del mismo. Para facilitar la gestión de la entrega, todo el código y documentación debe estar en este repositorio.
