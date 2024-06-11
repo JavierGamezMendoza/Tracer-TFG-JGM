@@ -4,6 +4,7 @@ import { FaEdit } from 'react-icons/fa';
 import UserService from '../../services/userService';
 import authService from '../../services/authService';
 import Image from 'react-bootstrap/Image';
+import { Card } from 'react-bootstrap';
 
 const Profile = () => {
     const [isEditing, setIsEditing] = useState(false);
@@ -15,7 +16,7 @@ const Profile = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-    
+
         setUser(prevUser => ({
             ...prevUser,
             [name]: value
@@ -40,7 +41,7 @@ const Profile = () => {
     }, [])
 
     return (
-        <Container className='border rounded shadow mt-5'>
+        <Container className='border rounded shadow mt-5 mb-5'>
             <Row className="justify-content-center">
                 <Col xs={12} sm={8} md={6} xl={4} className='d-flex justify-content-center align-items-center'>
                     <div className="text-center mb-4">
@@ -96,6 +97,24 @@ const Profile = () => {
                     </div>
                 </Col>
             </Row>
+                    <div className='row justify-content-around mt-4 mb-4'>
+                        <div className='col-md-6 col-lg-3'>
+                            <div className='card text-center'>
+                                <div className='card-body'>
+                                    <h5 className='card-title'>Followers</h5>
+                                    <h1>{user && user.followers ? user.followers.length : ''}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-md-6 col-lg-3'>
+                            <div className='card text-center'>
+                                <div className='card-body'>
+                                    <h5 className='card-title'>Followed</h5>
+                                    <h1>{user && user.follows ? user.follows.length : ''}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
         </Container>
     );
 };

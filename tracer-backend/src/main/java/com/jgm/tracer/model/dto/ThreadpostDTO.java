@@ -15,6 +15,6 @@ public class ThreadpostDTO {
     private Long id;
     private String message;
     private LocalDateTime creationDate;
-    private UserDTO user;
+    private UserInUserDTO user;
 
 }
