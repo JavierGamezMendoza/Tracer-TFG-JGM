@@ -101,6 +101,7 @@ public class InitializationData implements CommandLineRunner{
 
         Thread thread1 = new Thread();
         thread1.setTitle("Why is E30 so beautiful?");
+        thread1.setMessage("Can anybody explain me why E30 is so pretty?");
         thread1.setCreator(usuario1);
         thread1.setCreationDate(LocalDateTime.now());
         thread1.setVehicle(vehicle1);
@@ -108,6 +109,7 @@ public class InitializationData implements CommandLineRunner{
 
         Thread thread2 = new Thread();
         thread2.setTitle("Im the only one who has engine problems?");
+        thread2.setMessage("The engine wont start. I have to try at least 3 times");
         thread2.setCreator(usuario3);
         thread2.setCreationDate(LocalDateTime.now());
         thread2.setVehicle(vehicle1);

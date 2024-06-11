@@ -30,6 +30,9 @@ public class Thread {
     @Column(nullable = false, length = 40)
     private String title;
 
+    @Column(nullable = false, length = 200)
+    private String message;
+
     @Column(nullable = false)
     private LocalDateTime creationDate;
 

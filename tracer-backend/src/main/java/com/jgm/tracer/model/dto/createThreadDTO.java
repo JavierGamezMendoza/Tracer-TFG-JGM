@@ -1,14 +1,13 @@
 package com.jgm.tracer.model.dto;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-public class createThreadDTO {
-    private Long id;
+@Getter
+@Setter
+public class CreateThreadDTO {
     private String title;
-    private LocalDateTime creationDate;
-    private LocalDateTime closeDate;
-    private List<UserDTO> users;
-    private UserDTO creator;
-    private List<ThreadpostDTO> threadposts;
+    private String message;
+    private Long creatorId;
+    private Long vehicleId;
 }

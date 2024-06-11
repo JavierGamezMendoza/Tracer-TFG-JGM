@@ -3,8 +3,10 @@ package com.jgm.tracer.controller;
 import com.jgm.tracer.model.Thread;
 import com.jgm.tracer.model.User;
 import com.jgm.tracer.model.dto.ThreadDTO;
-import com.jgm.tracer.model.dto.createThreadDTO;
+import com.jgm.tracer.model.dto.CreateThreadDTO;
 import com.jgm.tracer.service.impl.ThreadService;
+import com.jgm.tracer.service.impl.UserService;
+import com.jgm.tracer.service.impl.VehicleService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -13,8 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -26,14 +26,14 @@ import java.util.List;
 public class ThreadController {
 
     @Autowired
-    private final ThreadService threadService;
+    private ThreadService threadService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private VehicleService vehicleService;
 
     @Autowired
     private ModelMapper modelMapper;
-
-    public ThreadController(final ThreadService threadService) {
-        this.threadService = threadService;
-    }
 
     @GetMapping
     public ResponseEntity<List<ThreadDTO>> getAllThreads() {
@@ -50,10 +50,17 @@ public class ThreadController {
 
     @PostMapping
     @ApiResponse(responseCode = "201")
-    public ResponseEntity<Thread> createThread(@RequestBody @Valid final ThreadDTO threadDTO) {
-        final Thread thread = modelMapper.map(threadDTO, Thread.class);
+    public ResponseEntity<ThreadDTO> createThread(@RequestBody @Valid final CreateThreadDTO createThreadDTO) {
+        final Thread thread = new Thread();
+        thread.setCreationDate(LocalDateTime.now());
+        thread.setCreator(userService.get(createThreadDTO.getCreatorId()));
+        thread.setVehicle(vehicleService.get(createThreadDTO.getVehicleId()));
+        thread.setMessage(createThreadDTO.getMessage());
+        thread.setTitle(createThreadDTO.getTitle());
+        System.out.println(thread.getId());
         final Thread createdThread = threadService.create(thread);
-        return new ResponseEntity<>(createdThread, HttpStatus.CREATED);
+        final ThreadDTO threadDTO = modelMapper.map(createdThread, ThreadDTO.class);
+        return new ResponseEntity<>(threadDTO, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

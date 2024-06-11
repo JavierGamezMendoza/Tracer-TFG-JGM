@@ -16,6 +16,7 @@ import java.util.Set;
 public class ThreadDTO {
     private Long id;
     private String title;
+    private String message;
     private LocalDateTime creationDate;
     private LocalDateTime closeDate;
     private List<UserDTO> users;
