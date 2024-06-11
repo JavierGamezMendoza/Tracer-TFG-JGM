@@ -9,23 +9,54 @@ import UserService from '../../services/userService';
 
 const Feed = () => {
   const [vehicles, setVehicles] = useState([]);
+  const [filteredVehicles, setFilteredVehicles] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
   const [currentUser, setCurrentUser] = useState(null);
+
   // Obtener todos los vehículos al cargar el componente
   const fetchVehicles = async () => {
     const allVehicles = await vehicleService.getAllVehicles();
     setVehicles(allVehicles);
-    console.log(allVehicles)
+    setFilteredVehicles(allVehicles); // Inicialmente, los vehículos filtrados serán todos los vehículos
   };
 
   const fetchCurrentUser = () => {
     const user = authService.getCurrentUser();
     setCurrentUser(user);
-};
+  };
 
   useEffect(() => {
     fetchCurrentUser();
     fetchVehicles();
   }, []);
+
+  // Función para filtrar vehículos seguidos por el usuario actual
+  const setFavoriteFilter = () => {
+    const favorites = vehicles.filter(vehicle => vehicle.followers.some(follower => follower.id === currentUser.id));
+    setFilteredVehicles(favorites);
+  };
+
+  const handleFavoriteButton = (id) => (event) => {
+    const isChecked = event.target.checked;
+    console.log(isChecked)
+    if (isChecked) {
+      setFavoriteFilter(id);
+    } else {
+      setFilteredVehicles(vehicles);
+    }
+  };
+
+  // Función para filtrar vehículos basados en el valor de búsqueda
+  useEffect(() => {
+    const filtered = vehicles.filter(vehicle => {
+      const modelMatch = vehicle.model && vehicle.model.toLowerCase().includes(searchValue.toLowerCase());
+      const brandMatch = vehicle.brand && vehicle.brand.toLowerCase().includes(searchValue.toLowerCase());
+      const dateMatch = vehicle.creationDate && new Date(vehicle.creationDate).toLocaleDateString().includes(searchValue);
+      return modelMatch || brandMatch || dateMatch;
+    });
+
+    setFilteredVehicles(filtered);
+  }, [searchValue, vehicles]);
 
   const followVehicle = async (id) => {
     try {
@@ -47,8 +78,6 @@ const Feed = () => {
 
   const handleFollowButton = (id) => (event) => {
     const isChecked = event.target.checked;
-
-    console.log(id);
     if (isChecked) {
       followVehicle(id);
     } else {
@@ -62,20 +91,37 @@ const Feed = () => {
         <Col xs={12} md={8}>
           <InputGroup>
             <FormControl
-              placeholder="Buscar vehículo..."
+              placeholder="Buscar vehículo por nombre o fecha de creación"
               aria-label="Buscar vehículo"
               aria-describedby="basic-addon2"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
             />
             <InputGroup.Text id="basic-addon2"><FaSearch /></InputGroup.Text>
           </InputGroup>
         </Col>
       </Row>
-      <Row className="justify-content-center">
-        {vehicles.map((vehicle, index) => (
-          <Col key={index} xs={6} sm={4} md={3} lg={2} xl={2}>
+      <Row className="justify-content-center mb-4">
+        <Col xs={12} md={8} className="justify-content-left">
+          <input
+            type="checkbox"
+            className='d-none'
+            id={`btn-check-favorites`}
+            autoComplete="off"
+            onChange={handleFavoriteButton()}
+          />
+          <label className={`${styles.checkboxFavorites}`} htmlFor={`btn-check-favorites`}><FaHeart /> Favoritos</label>
+        </Col>
+      </Row>
+      <Row className='justify-content-start d-flex flex-wrap m-5'>
+        {filteredVehicles.map((vehicle, index) => (
+          <Col key={index} xs={12} sm={12} md={6} lg={4} xl={4} className='mt-4 justify-content-left'>
             <Card>
               <Card.Body>
-                <Card.Title>{vehicle.brand} {vehicle.model}</Card.Title>
+                <Card.Title>
+                  <p>Brand: {vehicle.brand}</p>
+                  <p>Model: {vehicle.model} </p>
+                </Card.Title>
                 <Card.Text>
                   Creation Date: {new Date(vehicle.creationDate).toLocaleDateString()}
                 </Card.Text>

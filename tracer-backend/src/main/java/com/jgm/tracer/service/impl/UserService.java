@@ -2,6 +2,7 @@ package com.jgm.tracer.service.impl;
 
 import com.jgm.tracer.model.Thread;
 import com.jgm.tracer.model.Vehicle;
+import com.jgm.tracer.model.dto.PostUserDTO;
 import com.jgm.tracer.model.dto.UserDTO;
 import com.jgm.tracer.model.dto.UserResponse;
 import com.jgm.tracer.model.dto.VehicleDTO;
@@ -76,13 +77,12 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User update(final Long id, final UserDTO userDTO) {
+    public User update(final Long id, final PostUserDTO postUserDTO) {
         final User user = userRepository.findById(id)
                 .orElseThrow(NotFoundException::new);
-        User updatedUser = modelMapper.map(userDTO, User.class);
-        user.setUsername(updatedUser.getUsername());
-        user.setBio(updatedUser.getBio());
-        user.setPassword(updatedUser.getPassword());
+
+        user.setUsername(postUserDTO.getUsername());
+        user.setBio(postUserDTO.getBio());
         userRepository.save(user);
         return user;
     }

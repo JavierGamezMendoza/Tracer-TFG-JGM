@@ -23,7 +23,7 @@ const Users = () => {
 
     return (
         <Container>
-            <Table bordered hover className='text-center mt-4'>
+            <Table bordered hover className='text-center align-middle mt-4'>
                 <thead>
                     <tr>
                         <th>Profile Pic</th>

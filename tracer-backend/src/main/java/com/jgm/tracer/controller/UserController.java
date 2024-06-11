@@ -1,6 +1,7 @@
 package com.jgm.tracer.controller;
 
 import com.jgm.tracer.model.User;
+import com.jgm.tracer.model.dto.PostUserDTO;
 import com.jgm.tracer.model.dto.UserDTO;
 import com.jgm.tracer.model.dto.UserResponse;
 import com.jgm.tracer.model.dto.VehicleDTO;
@@ -42,22 +43,19 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable(name = "id") final Long id) {
-        return ResponseEntity.ok(userService.get(id));
-    }
-
-    @PostMapping
-    @ApiResponse(responseCode = "201")
-    public ResponseEntity<User> createUser(@RequestBody @Valid final UserDTO userDTO) {
-        final User user = userService.create(userDTO);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+    public ResponseEntity<UserDTO> getUser(@PathVariable(name = "id") final Long id) {
+        UserDTO userDTO = modelMapper.map(userService.get(id), UserDTO.class);
+        return ResponseEntity.ok(userDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable(name = "id") final Long id,
-            @RequestBody @Valid final UserDTO userDTO) {
-        User user = userService.update(id, userDTO);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<UserDTO> updateUser(@PathVariable(name = "id") final Long id,
+                                              @RequestBody @Valid final PostUserDTO postUserDTO) {
+
+        User user = userService.update(id, postUserDTO);
+        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+
+        return ResponseEntity.ok(userDTO);
     }
 
     @DeleteMapping("/{id}")

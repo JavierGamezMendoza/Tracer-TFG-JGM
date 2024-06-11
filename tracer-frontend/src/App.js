@@ -11,6 +11,7 @@ import Logout from "./guard/logout";
 import authService from "./services/authService";
 import MyNavbar from "./components/navbar/MyNavbar";
 import Users from "./modules/users/users";
+import Profile from "./modules/profile/profile";
 
 function App() {
 
@@ -44,9 +45,11 @@ function App() {
           <Route path="/vehicle/:id" element={<Guardian><VehiclesFeed /></Guardian>} />
           <Route path="/thread/:id" element={<Guardian><Threadposts /></Guardian>} />
           <Route path="/users" element={<Guardian><Users /></Guardian>} />
+          <Route path="/profile" element={<Guardian><Profile /></Guardian>} />
           <Route path="/login" element={<Login actualizarUsuario={actualizarUsuario} />} />
           <Route path="/register" element={<Register actualizarUsuario={actualizarUsuario} />} />
           <Route path="/logout" element={<Logout actualizarUsuario={actualizarUsuario} />} />
+
         </Routes>
       </BrowserRouter>
     </div>
