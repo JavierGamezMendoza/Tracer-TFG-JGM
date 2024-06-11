@@ -138,9 +138,13 @@ const Threadposts = () => {
                                 </div>
                             </div>
                             <hr />
-                            <div className='d-flex justify-content-left'>
-                                <div>
+                            <div className='justify-content-left'>
+                                <h5>
                                     {thread.title}
+                                </h5>
+
+                                <div className='p-4 bg-light rounded mt-4'>
+                                    {thread.message}
                                 </div>
                             </div>
                             <div className='d-flex justify-content-between align-items-center mt-4'>

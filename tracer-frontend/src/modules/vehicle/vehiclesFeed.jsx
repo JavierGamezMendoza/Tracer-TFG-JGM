@@ -170,14 +170,18 @@ const VehicleFeed = () => {
             <Card.Body>
               <div className='d-flex justify-content-between'>
                 <div>
-                  {thread.title}
+                  <h5>{thread.title}</h5>
                 </div>
                 <div className='align-items-center justify-content-center'>
                   <Image className={styles.profilePic} src={thread.creator.img} /> {thread.creator.username}
                 </div>
               </div>
-              <hr />
-              <div className='d-flex justify-content-between align-items-center'>
+
+              <div className='mt-4 mb-4 bg-light p-4 rounded '>
+                {thread.message}
+              </div>
+
+              <div className='d-flex justify-content-between align-items-cente'>
                 <div>
                   {thread.closeDate == null &&
                     <div className={`justify-content-between align-items-center`}>
