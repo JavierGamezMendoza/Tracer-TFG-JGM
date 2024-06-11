@@ -1,5 +1,7 @@
 package com.jgm.tracer.service.impl;
 
+import com.jgm.tracer.model.Thread;
+import com.jgm.tracer.model.Vehicle;
 import com.jgm.tracer.model.dto.UserDTO;
 import com.jgm.tracer.model.dto.UserResponse;
 import com.jgm.tracer.repository.ThreadRepository;
@@ -48,10 +50,10 @@ public class UserService {
     @Autowired
     private ThreadpostRepository threadpostRepository;
 
-    public List<UserResponse> findAll() {
+    public List<UserDTO> findAll() {
         List<User> users = userRepository.findAll();
         return users.stream()
-                .map(user -> modelMapper.map(user, UserResponse.class))
+                .map(user -> modelMapper.map(user, UserDTO.class))
                 .collect(Collectors.toList());
     }
 
@@ -84,6 +86,40 @@ public class UserService {
         user.setPassword(updatedUser.getPassword());
         userRepository.save(user);
         return user;
+    }
+
+    public User followThread(final Long idThread, final Long idUser){
+        Thread thread = threadRepository.getReferenceById(idThread);
+        User user = userRepository.getReferenceById(idUser);
+
+        user.getThreads().add(thread);
+
+        return userRepository.save(user);
+    }
+
+    public User unFollowThread(final Long idThread, final Long idUser){
+        Thread thread = threadRepository.getReferenceById(idThread);
+        User user = userRepository.getReferenceById(idUser);
+
+        user.getThreads().remove(thread);
+        return userRepository.save(user);
+    }
+
+    public User followVehicle(final Long idVehicle, final Long idUser){
+        Vehicle vehicle = vehicleRepository.getReferenceById(idVehicle);
+        User user = userRepository.getReferenceById(idUser);
+
+        user.getVehicles().add(vehicle);
+
+        return userRepository.save(user);
+    }
+
+    public User unFollowVehicle(final Long idVehicle, final Long idUser){
+        Vehicle vehicle = vehicleRepository.getReferenceById(idVehicle);
+        User user = userRepository.getReferenceById(idUser);
+
+        user.getVehicles().remove(vehicle);
+        return userRepository.save(user);
     }
 
     public void delete(final Long id) {

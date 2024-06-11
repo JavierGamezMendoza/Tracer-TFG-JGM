@@ -1,5 +1,6 @@
 package com.jgm.tracer.controller.auth;
 
+import com.jgm.tracer.model.dto.UserDTO;
 import com.jgm.tracer.model.dto.UserResponse;
 import com.jgm.tracer.service.impl.UserService;
 import org.slf4j.Logger;
@@ -25,9 +26,9 @@ public class AuthorizationAdminController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<List<UserResponse>> showUsers() {
+    public ResponseEntity<List<UserDTO>> showUsers() {
         logger.info("## AuthorizationAdminController :: showUsers" );
-        List<UserResponse> userList = userService.findAll();
+        List<UserDTO> userList = userService.findAll();
         return ResponseEntity.ok(userList);
     }
 }

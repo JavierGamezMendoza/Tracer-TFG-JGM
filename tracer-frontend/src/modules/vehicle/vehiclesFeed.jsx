@@ -9,11 +9,12 @@ import { FaUser, FaCheck } from 'react-icons/fa';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import dateService from '../../services/dateService'
+import { AiFillMessage } from 'react-icons/ai';
 
 const VehicleFeed = () => {
   const { id } = useParams();
   const [vehicle, setVehicle] = useState(null);
-  const [threads, setThreads] =useState(null)
+  const [threads, setThreads] = useState(null)
 
   useEffect(() => {
     console.log("EL ID ES:", id)
@@ -66,8 +67,14 @@ const VehicleFeed = () => {
                     </Link>
                   }
                 </div>
-                <div>
-                  <FaUser /> {thread.users.length}
+                <div className='d-flex align-items-centers'>
+                  <div className='d-flex align-items-center'>
+                    <FaUser className='me-1'></FaUser> {thread.users.length}
+                  </div >
+                  <div className='ms-2 d-flex align-items-center'>
+                    <AiFillMessage className='me-1'></AiFillMessage> {thread.threadposts.length}
+
+                  </div>
                 </div>
               </div>
 

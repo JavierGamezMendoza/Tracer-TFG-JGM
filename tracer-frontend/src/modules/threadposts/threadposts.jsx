@@ -14,6 +14,7 @@ import dateService from '../../services/dateService'
 import { IoShieldCheckmark } from 'react-icons/io5';
 import { Tooltip } from 'react-tooltip'
 import { FaRegCheckCircle, FaHeart } from "react-icons/fa";
+import UserService from '../../services/userService';
 
 const Threadposts = () => {
     const { id } = useParams();
@@ -88,7 +89,7 @@ const Threadposts = () => {
 
     const followThread = async (id) => {
         try {
-            await threadService.followThread(id);
+            await UserService.followThread(id);
             fetchThreadposts();
         } catch (error) {
             console.log(error);
@@ -97,7 +98,7 @@ const Threadposts = () => {
 
     const unFollowThread = async (id) => {
         try {
-            await threadService.unFollowThread(id);
+            await UserService.unFollowThread(id);
             fetchThreadposts();
         } catch (error) {
             console.log(error);

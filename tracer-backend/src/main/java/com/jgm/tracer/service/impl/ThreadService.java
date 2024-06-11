@@ -65,22 +65,6 @@ public class ThreadService {
         threadRepository.deleteById(id);
     }
 
-    public User follow(final Long idThread, final Long idUser){
-        Thread thread = threadRepository.getReferenceById(idThread);
-        User user = userRepository.getReferenceById(idUser);
-
-        user.getThreads().add(thread);
-
-        return userRepository.save(user);
-    }
-
-    public User unfollow(final Long idThread, final Long idUser){
-        Thread thread = threadRepository.getReferenceById(idThread);
-        User user = userRepository.getReferenceById(idUser);
-
-        user.getThreads().remove(thread);
-        return userRepository.save(user);
-    }
 
     public List<ThreadDTO> convertToDTOList(List<Thread> threads) {
         return threads.stream()

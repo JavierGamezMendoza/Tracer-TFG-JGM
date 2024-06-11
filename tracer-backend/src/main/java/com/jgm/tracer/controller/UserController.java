@@ -31,7 +31,7 @@ public class UserController {
     private VehicleService vehicleService;
 
     @GetMapping
-    public ResponseEntity<List<UserResponse>> getAllUsers() {
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
         return ResponseEntity.ok(userService.findAll());
     }
 
@@ -61,22 +61,40 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/follow/{id}")
+    @PatchMapping("/follow/thread/{id}")
     @ApiResponse(responseCode = "201")
     public void followThread(
             @PathVariable(name = "id") final Long id,
             @AuthenticationPrincipal User userDetails
     ){
-        threadService.follow(id, userDetails.getId());
+        userService.followThread(id, userDetails.getId());
     }
 
-    @PatchMapping("/unfollow/{id}")
+    @PatchMapping("/unfollow/thread/{id}")
     @ApiResponse(responseCode = "201")
     public void unfollowThread(
             @PathVariable(name = "id") final Long id,
             @AuthenticationPrincipal User userDetails
     ){
-        threadService.unfollow(id, userDetails.getId());
+        userService.unFollowThread(id, userDetails.getId());
+    }
+
+    @PatchMapping("/follow/vehicle/{id}")
+    @ApiResponse(responseCode = "201")
+    public void followVehicle(
+            @PathVariable(name = "id") final Long id,
+            @AuthenticationPrincipal User userDetails
+    ){
+        userService.followVehicle(id, userDetails.getId());
+    }
+
+    @PatchMapping("/unfollow/vehicle/{id}")
+    @ApiResponse(responseCode = "201")
+    public void unFollowVehicle(
+            @PathVariable(name = "id") final Long id,
+            @AuthenticationPrincipal User userDetails
+    ){
+        userService.unFollowVehicle(id, userDetails.getId());
     }
 
 }

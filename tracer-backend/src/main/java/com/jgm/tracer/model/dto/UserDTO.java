@@ -4,6 +4,8 @@ import com.jgm.tracer.model.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class UserDTO {
@@ -13,4 +15,6 @@ public class UserDTO {
     private String email;
     private String bio;
     private Boolean reliable;
+    private List<UserInUserDTO> followers;
+    private List<UserInUserDTO> follows;
 }

@@ -4,6 +4,26 @@ import axiosInstance from '../interceptor/tokenInterceptor';
 
 const UserService = {
 
+    getAllUsers: async () => {
+        try {
+          const response = await axiosInstance.get('/users');
+          return response.data;
+        } catch (error) {
+          console.error('Error al obtener los usuarios:', error);
+          return [];
+        }
+      },
+      // Método para obtener un vehículo por su ID
+    getUserpostById: async (id) => {
+        try {
+          const response = await axiosInstance.get(`/users/${id}`);
+          return response.data;
+        } catch (error) {
+          console.error(`Error al obtener el usuario con ID ${id}:`, error);
+          return null;
+        }
+      },
+
     followVehicle: async (id) => {
         try {
             const response = await axiosInstance.patch(`/users/follow/vehicle/${id}`);

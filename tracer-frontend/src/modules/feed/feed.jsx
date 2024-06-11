@@ -5,6 +5,7 @@ import { FaSearch, FaHeart } from "react-icons/fa";
 import { Link } from 'react-router-dom';
 import styles from './feed.module.css';
 import authService from '../../services/authService';
+import UserService from '../../services/userService';
 
 const Feed = () => {
   const [vehicles, setVehicles] = useState([]);
@@ -28,7 +29,7 @@ const Feed = () => {
 
   const followVehicle = async (id) => {
     try {
-      await vehicleService.followVehicle(id);
+      await UserService.followVehicle(id);
       fetchVehicles();
     } catch (error) {
       console.log(error);
@@ -37,7 +38,7 @@ const Feed = () => {
 
   const unFollowVehicle = async (id) => {
     try {
-      await vehicleService.unFollowVehicle(id);
+      await UserService.unFollowVehicle(id);
       fetchVehicles();
     } catch (error) {
       console.log(error);
@@ -46,6 +47,8 @@ const Feed = () => {
 
   const handleFollowButton = (id) => (event) => {
     const isChecked = event.target.checked;
+
+    console.log(id);
     if (isChecked) {
       followVehicle(id);
     } else {
@@ -85,12 +88,12 @@ const Feed = () => {
                   <input
                     type="checkbox"
                     className='d-none'
-                    id="btn-check"
+                    id={`btn-check-${vehicle.id}`}
                     autoComplete="off"
                     onChange={handleFollowButton(vehicle.id)}
                     checked={vehicle.followers.some(user => user.id === currentUser.id)}
                   />
-                  <label className={`${styles.checkbox}`} htmlFor="btn-check"><FaHeart></FaHeart></label>
+                  <label className={`${styles.checkbox}`} htmlFor={`btn-check-${vehicle.id}`}><FaHeart></FaHeart></label>
                 </div>
               </Card.Body>
             </Card>

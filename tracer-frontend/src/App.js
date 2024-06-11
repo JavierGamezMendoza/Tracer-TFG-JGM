@@ -10,6 +10,7 @@ import Threadposts from "./modules/threadposts/threadposts";
 import Logout from "./guard/logout";
 import authService from "./services/authService";
 import MyNavbar from "./components/navbar/MyNavbar";
+import Users from "./modules/users/users";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/feed" element={<Guardian><Feed /></Guardian>} />
           <Route path="/vehicle/:id" element={<Guardian><VehiclesFeed /></Guardian>} />
           <Route path="/thread/:id" element={<Guardian><Threadposts /></Guardian>} />
+          <Route path="/users" element={<Guardian><Users /></Guardian>} />
           <Route path="/login" element={<Login actualizarUsuario={actualizarUsuario}/>} />
           <Route path="/register" element={<Register actualizarUsuario={actualizarUsuario}/>} />
           <Route path="/logout" element={<Logout actualizarUsuario={actualizarUsuario}/>} />
