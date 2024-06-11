@@ -1,0 +1,32 @@
+/* MyComponent.module.css */
+.checkbox {
+    border: 2px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color:#eee;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border: none;
+  }
+  
+  .checkbox:hover {
+    color: rgb(179, 0, 0);
+  }
+  
+  .checkbox:checked {
+    background-color: #cfcfcf;
+  }
+  
+  .checkbox svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  input[type="checkbox"]:checked + label {
+    color: #f00; /* Cambiar color del ícono cuando está marcado */
+  }
