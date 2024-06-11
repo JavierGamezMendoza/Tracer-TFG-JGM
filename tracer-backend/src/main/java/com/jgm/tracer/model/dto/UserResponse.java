@@ -1,13 +1,18 @@
 package com.jgm.tracer.model.dto;
 
 import com.jgm.tracer.model.User;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Getter
+@Setter
 public class UserResponse {
     private String username;
     private String bio;
     private String email;
+    private String profilePic;
     private List<User> followers;
     private List<User> follows;
     private List<Thread> threads;
@@ -17,31 +22,6 @@ public class UserResponse {
         this.username = username;
         this.bio = bio;
         this.email = email;
-        this.role = role;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getBio() {
-        return bio;
-    }
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getRole() {
-        return role;
-    }
-    public void setRole(String rol) {
         this.role = role;
     }
 }

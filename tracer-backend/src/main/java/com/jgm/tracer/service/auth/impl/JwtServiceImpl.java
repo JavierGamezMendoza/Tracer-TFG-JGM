@@ -56,6 +56,7 @@ public class JwtServiceImpl implements JwtService {
         claims.put("username", user.getUsername());
         claims.put("role", user.getRole().toString());
         claims.put("reliable", user.getReliable());
+        claims.put("profilePic", user.getProfilePic());
         claims.put("id", user.getId());
 
         return generateToken(claims, user);

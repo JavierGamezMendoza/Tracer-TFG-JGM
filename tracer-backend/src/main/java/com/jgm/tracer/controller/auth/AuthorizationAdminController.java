@@ -24,11 +24,11 @@ public class AuthorizationAdminController {
     private UserService userService;
 
 
-    @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<List<UserDTO>> showUsers() {
-        logger.info("## AuthorizationAdminController :: showUsers" );
-        List<UserDTO> userList = userService.findAll();
-        return ResponseEntity.ok(userList);
-    }
+    //@GetMapping
+    //@PreAuthorize("hasAuthority('ADMIN')")
+   // public ResponseEntity<List<UserDTO>> showUsers() {
+    //    logger.info("## AuthorizationAdminController :: showUsers" );
+   //     List<UserDTO> userList = userService.findAll();
+    //    return ResponseEntity.ok(userList);
+   // }
 }

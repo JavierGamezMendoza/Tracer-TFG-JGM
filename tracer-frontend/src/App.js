@@ -15,26 +15,38 @@ import Users from "./modules/users/users";
 function App() {
 
   const [authenticated, setAuthenticated] = useState(true);
+  const [currentUser, setCurrentUser] = useState(true);
+
+  const fetchCurrentUser = () => {
+    const user = authService.getCurrentUser();
+    console.log(user)
+    setCurrentUser(user);
+  };
 
   const actualizarUsuario = (nuevoUsuario) => {
     setAuthenticated(nuevoUsuario);
+    fetchCurrentUser();
   };
+
+  useEffect(() => {
+    fetchCurrentUser();
+  }, [])
 
   return (
     <div>
       {/* Renderizar el navbar solo si el usuario está autenticado */}
 
       <BrowserRouter>
-        {authenticated && <MyNavbar />}
+        {authenticated && <MyNavbar currentUser={currentUser}/>}
         <Routes>
           <Route path="/" element={<Guardian><Feed /></Guardian>} />
           <Route path="/feed" element={<Guardian><Feed /></Guardian>} />
           <Route path="/vehicle/:id" element={<Guardian><VehiclesFeed /></Guardian>} />
           <Route path="/thread/:id" element={<Guardian><Threadposts /></Guardian>} />
           <Route path="/users" element={<Guardian><Users /></Guardian>} />
-          <Route path="/login" element={<Login actualizarUsuario={actualizarUsuario}/>} />
-          <Route path="/register" element={<Register actualizarUsuario={actualizarUsuario}/>} />
-          <Route path="/logout" element={<Logout actualizarUsuario={actualizarUsuario}/>} />
+          <Route path="/login" element={<Login actualizarUsuario={actualizarUsuario} />} />
+          <Route path="/register" element={<Register actualizarUsuario={actualizarUsuario} />} />
+          <Route path="/logout" element={<Logout actualizarUsuario={actualizarUsuario} />} />
         </Routes>
       </BrowserRouter>
     </div>

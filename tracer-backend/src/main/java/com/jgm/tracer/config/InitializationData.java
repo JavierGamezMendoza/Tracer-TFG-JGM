@@ -11,6 +11,7 @@ import com.jgm.tracer.repository.ThreadRepository;
 import com.jgm.tracer.repository.ThreadpostRepository;
 import com.jgm.tracer.repository.UserRepository;
 import com.jgm.tracer.repository.VehicleRepository;
+import com.jgm.tracer.service.impl.PexelsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +39,9 @@ public class InitializationData implements CommandLineRunner{
     @Autowired
     private ThreadpostRepository threadpostRepository;
 
+    @Autowired
+    private PexelsService pexelsService;
+
     @Override
     public void run(String... args) throws Exception {
 
@@ -47,6 +51,7 @@ public class InitializationData implements CommandLineRunner{
         usuario1.setEmail("alice.johnson@example.com");
         usuario1.setBio("A bike lover and a cross entusiast");
         usuario1.setPassword(passwordEncoder.encode("password123"));
+        usuario1.setProfilePic(pexelsService.getRandomImageURL());
         usuario1.setRole(Role.USER);
         usuario1.setReliable(true);
         usuarioRepository.save(usuario1);
@@ -57,6 +62,7 @@ public class InitializationData implements CommandLineRunner{
         usuario2.setEmail("frank.miller@example.com");
         usuario2.setBio("Car Guy - R32 ");
         usuario2.setPassword(passwordEncoder.encode("password123"));
+        usuario2.setProfilePic(pexelsService.getRandomImageURL());
         usuario2.setRole(Role.USER);
         usuario2.setReliable(false);
         usuarioRepository.save(usuario2);
@@ -67,6 +73,7 @@ public class InitializationData implements CommandLineRunner{
         usuario3.setEmail("bob.johnson@example.com");
         usuario3.setBio("Car Guy - R32 ");
         usuario3.setPassword(passwordEncoder.encode("password123"));
+        usuario3.setProfilePic(pexelsService.getRandomImageURL());
         usuario3.setRole(Role.ADMIN);
         usuario3.setReliable(true);
         usuarioRepository.save(usuario3);

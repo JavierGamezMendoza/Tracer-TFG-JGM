@@ -3,8 +3,9 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Image from 'react-bootstrap/Image';
 import { Link } from 'react-router-dom'; // Importa Link desde react-router-dom
+import authService from '../../services/authService'
 
-const MyNavbar = () => {
+const MyNavbar = ({currentUser}) => {
     const [expanded, setExpanded] = useState(false);
 
     return (
@@ -17,7 +18,7 @@ const MyNavbar = () => {
                         <Nav.Link as={Link} to="/">Inicio</Nav.Link>
                         <Nav.Link as={Link} to="/users">Usuarios</Nav.Link>
                         <NavDropdown
-                            title={<Image src="ruta-a-la-imagen-de-perfil.jpg" roundedCircle width="30" />}
+                            title={<Image src={currentUser.profilePic} roundedCircle width="20" height="20" />}
                             id="basic-nav-dropdown"
                             className="custom-dropdown d-sm-none d-lg-block"
                             align="end"

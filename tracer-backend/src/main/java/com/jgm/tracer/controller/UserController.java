@@ -3,6 +3,7 @@ package com.jgm.tracer.controller;
 import com.jgm.tracer.model.User;
 import com.jgm.tracer.model.dto.UserDTO;
 import com.jgm.tracer.model.dto.UserResponse;
+import com.jgm.tracer.model.dto.VehicleDTO;
 import com.jgm.tracer.service.impl.ThreadService;
 import com.jgm.tracer.service.impl.UserService;
 import com.jgm.tracer.service.impl.VehicleService;
@@ -10,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,10 +31,14 @@ public class UserController {
     private ThreadService threadService;
     @Autowired
     private VehicleService vehicleService;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @GetMapping
     public ResponseEntity<List<UserDTO>> getAllUsers() {
-        return ResponseEntity.ok(userService.findAll());
+        List<User> users = userService.findAll();
+        List<UserDTO> usersDTO = userService.convertToDTOList(users);
+        return ResponseEntity.ok(usersDTO);
     }
 
     @GetMapping("/{id}")

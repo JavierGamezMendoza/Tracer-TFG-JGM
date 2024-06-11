@@ -4,6 +4,7 @@ import com.jgm.tracer.model.Thread;
 import com.jgm.tracer.model.Vehicle;
 import com.jgm.tracer.model.dto.UserDTO;
 import com.jgm.tracer.model.dto.UserResponse;
+import com.jgm.tracer.model.dto.VehicleDTO;
 import com.jgm.tracer.repository.ThreadRepository;
 import com.jgm.tracer.repository.ThreadpostRepository;
 import com.jgm.tracer.model.User;
@@ -50,11 +51,9 @@ public class UserService {
     @Autowired
     private ThreadpostRepository threadpostRepository;
 
-    public List<UserDTO> findAll() {
+    public List<User> findAll() {
         List<User> users = userRepository.findAll();
-        return users.stream()
-                .map(user -> modelMapper.map(user, UserDTO.class))
-                .collect(Collectors.toList());
+        return users;
     }
 
     public User getByEmail(final String email) {
@@ -124,6 +123,15 @@ public class UserService {
 
     public void delete(final Long id) {
         userRepository.deleteById(id);
+    }
+
+    public List<UserDTO> convertToDTOList(List<User> users) {
+        return users.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+    private UserDTO convertToDto(User user) {
+        return modelMapper.map(user, UserDTO.class);
     }
 }
 

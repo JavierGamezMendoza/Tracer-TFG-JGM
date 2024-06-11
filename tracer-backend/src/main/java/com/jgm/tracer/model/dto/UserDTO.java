@@ -14,6 +14,7 @@ public class UserDTO {
     private Role role;
     private String email;
     private String bio;
+    private String profilePic;
     private Boolean reliable;
     private List<UserInUserDTO> followers;
     private List<UserInUserDTO> follows;
