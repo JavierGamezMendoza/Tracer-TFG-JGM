@@ -1,0 +1,1067 @@
+{
+	"info": {
+		"_postman_id": "8a6c804d-93b2-4cf6-b2b1-32ecdb77a231",
+		"name": "tracer_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25324160"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwicHJvZmlsZVBpYyI6Imh0dHBzOi8vaW1hZ2VzLnBleGVscy5jb20vcGhvdG9zLzE3MDgxMS9wZXhlbHMtcGhvdG8tMTcwODExLmpwZWc_YXV0bz1jb21wcmVzcyZjcz10aW55c3JnYiZoPTM1MCIsImlkIjozLCJ1c2VybmFtZSI6IkJvYmJpZUUzMDEzMSIsInN1YiI6ImJvYi5qb2huc29uQGV4YW1wbGUuY29tIiwiaWF0IjoxNzE4MTkxMTQwLCJleHAiOjE3MTgyMjcxNDB9.6d8WvCM9NnboVfsRSST9PWv9HYRBTYRrlB60Bsi1M_M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"NEW USERNAME\",\n    \"bio\":\"NEW BIOGRAPHY\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "follow thread",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwicHJvZmlsZVBpYyI6Imh0dHBzOi8vaW1hZ2VzLnBleGVscy5jb20vcGhvdG9zLzEwMDAzNjYvcGV4ZWxzLXBob3RvLTEwMDAzNjYuanBlZz9hdXRvPWNvbXByZXNzJmNzPXRpbnlzcmdiJmg9MzUwIiwiaWQiOjMsInVzZXJuYW1lIjoiQm9iYmllRTMwIiwic3ViIjoiYm9iLmpvaG5zb25AZXhhbXBsZS5jb20iLCJpYXQiOjE3MTgxOTM3MjAsImV4cCI6MTcxODIyOTcyMH0.YuH6TNpUO_Ecy29B6Pr09olxws6g-AIVwI-Jh7NJz8o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/follow/thread/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"follow",
+								"thread",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unfollow vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwicHJvZmlsZVBpYyI6Imh0dHBzOi8vaW1hZ2VzLnBleGVscy5jb20vcGhvdG9zLzEwMDAzNjYvcGV4ZWxzLXBob3RvLTEwMDAzNjYuanBlZz9hdXRvPWNvbXByZXNzJmNzPXRpbnlzcmdiJmg9MzUwIiwiaWQiOjMsInVzZXJuYW1lIjoiQm9iYmllRTMwIiwic3ViIjoiYm9iLmpvaG5zb25AZXhhbXBsZS5jb20iLCJpYXQiOjE3MTgxOTM3MjAsImV4cCI6MTcxODIyOTcyMH0.YuH6TNpUO_Ecy29B6Pr09olxws6g-AIVwI-Jh7NJz8o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/unfollow/vehicle/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"unfollow",
+								"vehicle",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "follow vehicle",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwicHJvZmlsZVBpYyI6Imh0dHBzOi8vaW1hZ2VzLnBleGVscy5jb20vcGhvdG9zLzEwMDAzNjYvcGV4ZWxzLXBob3RvLTEwMDAzNjYuanBlZz9hdXRvPWNvbXByZXNzJmNzPXRpbnlzcmdiJmg9MzUwIiwiaWQiOjMsInVzZXJuYW1lIjoiQm9iYmllRTMwIiwic3ViIjoiYm9iLmpvaG5zb25AZXhhbXBsZS5jb20iLCJpYXQiOjE3MTgxOTM3MjAsImV4cCI6MTcxODIyOTcyMH0.YuH6TNpUO_Ecy29B6Pr09olxws6g-AIVwI-Jh7NJz8o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/follow/vehicle/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"follow",
+								"vehicle",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unfollow thread",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwicHJvZmlsZVBpYyI6Imh0dHBzOi8vaW1hZ2VzLnBleGVscy5jb20vcGhvdG9zLzEwMDAzNjYvcGV4ZWxzLXBob3RvLTEwMDAzNjYuanBlZz9hdXRvPWNvbXByZXNzJmNzPXRpbnlzcmdiJmg9MzUwIiwiaWQiOjMsInVzZXJuYW1lIjoiQm9iYmllRTMwIiwic3ViIjoiYm9iLmpvaG5zb25AZXhhbXBsZS5jb20iLCJpYXQiOjE3MTgxOTM3MjAsImV4cCI6MTcxODIyOTcyMH0.YuH6TNpUO_Ecy29B6Pr09olxws6g-AIVwI-Jh7NJz8o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/unfollow/thread/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"unfollow",
+								"thread",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket",
+			"item": [
+				{
+					"name": "Get All Tickets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwicHJvZmlsZVBpYyI6Imh0dHBzOi8vaW1hZ2VzLnBleGVscy5jb20vcGhvdG9zLzE3MDgxMS9wZXhlbHMtcGhvdG8tMTcwODExLmpwZWc_YXV0bz1jb21wcmVzcyZjcz10aW55c3JnYiZoPTM1MCIsImlkIjozLCJ1c2VybmFtZSI6IkJvYmJpZUUzMDEzMSIsInN1YiI6ImJvYi5qb2huc29uQGV4YW1wbGUuY29tIiwiaWF0IjoxNzE4MTkxMTQwLCJleHAiOjE3MTgyMjcxNDB9.6d8WvCM9NnboVfsRSST9PWv9HYRBTYRrlB60Bsi1M_M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tickets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Ticket by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwicHJvZmlsZVBpYyI6Imh0dHBzOi8vaW1hZ2VzLnBleGVscy5jb20vcGhvdG9zLzE3MDgxMS9wZXhlbHMtcGhvdG8tMTcwODExLmpwZWc_YXV0bz1jb21wcmVzcyZjcz10aW55c3JnYiZoPTM1MCIsImlkIjozLCJ1c2VybmFtZSI6IkJvYmJpZUUzMDEzMSIsInN1YiI6ImJvYi5qb2huc29uQGV4YW1wbGUuY29tIiwiaWF0IjoxNzE4MTkxMTQwLCJleHAiOjE3MTgyMjcxNDB9.6d8WvCM9NnboVfsRSST9PWv9HYRBTYRrlB60Bsi1M_M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tickets/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tickets",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create ticket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwicHJvZmlsZVBpYyI6Imh0dHBzOi8vaW1hZ2VzLnBleGVscy5jb20vcGhvdG9zLzE3MDgxMS9wZXhlbHMtcGhvdG8tMTcwODExLmpwZWc_YXV0bz1jb21wcmVzcyZjcz10aW55c3JnYiZoPTM1MCIsImlkIjozLCJ1c2VybmFtZSI6IkJvYmJpZUUzMDEzMSIsInN1YiI6ImJvYi5qb2huc29uQGV4YW1wbGUuY29tIiwiaWF0IjoxNzE4MTkxMTQwLCJleHAiOjE3MTgyMjcxNDB9.6d8WvCM9NnboVfsRSST9PWv9HYRBTYRrlB60Bsi1M_M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"creatorId\": 1,\r\n    \"infractorId\": 1,\r\n    \"threadpostId\": 1,\r\n    \"message\": \"Thats offensive\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tickets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close Ticket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwicHJvZmlsZVBpYyI6Imh0dHBzOi8vaW1hZ2VzLnBleGVscy5jb20vcGhvdG9zLzE3MDgxMS9wZXhlbHMtcGhvdG8tMTcwODExLmpwZWc_YXV0bz1jb21wcmVzcyZjcz10aW55c3JnYiZoPTM1MCIsImlkIjozLCJ1c2VybmFtZSI6IkJvYmJpZUUzMDEzMSIsInN1YiI6ImJvYi5qb2huc29uQGV4YW1wbGUuY29tIiwiaWF0IjoxNzE4MTkxMTQwLCJleHAiOjE3MTgyMjcxNDB9.6d8WvCM9NnboVfsRSST9PWv9HYRBTYRrlB60Bsi1M_M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\":\"NEW USERNAME\",\n    \"bio\":\"NEW BIOGRAPHY\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/tickets/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tickets",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Ticket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwicHJvZmlsZVBpYyI6Imh0dHBzOi8vaW1hZ2VzLnBleGVscy5jb20vcGhvdG9zLzE3MDgxMS9wZXhlbHMtcGhvdG8tMTcwODExLmpwZWc_YXV0bz1jb21wcmVzcyZjcz10aW55c3JnYiZoPTM1MCIsImlkIjozLCJ1c2VybmFtZSI6IkJvYmJpZUUzMDEzMSIsInN1YiI6ImJvYi5qb2huc29uQGV4YW1wbGUuY29tIiwiaWF0IjoxNzE4MTkxMTQwLCJleHAiOjE3MTgyMjcxNDB9.6d8WvCM9NnboVfsRSST9PWv9HYRBTYRrlB60Bsi1M_M",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tickets/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tickets",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Thread",
+			"item": [
+				{
+					"name": "Get All Threads",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/threads",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"threads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Thread by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwiaWQiOjMsInVzZXJuYW1lIjoiQm9iYmllRTMwIiwic3ViIjoiYm9iLmpvaG5zb25AZXhhbXBsZS5jb20iLCJpYXQiOjE3MTgxMDE5MTAsImV4cCI6MTcxODEzNzkxMH0.0qyfVuO2UMJ2wYt65Ny1HJ1TDAdxky3W6I0WntGZDW0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/threads/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"threads",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Thread",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwicHJvZmlsZVBpYyI6Imh0dHBzOi8vaW1hZ2VzLnBleGVscy5jb20vcGhvdG9zLzUxOTIyNDcvcGV4ZWxzLXBob3RvLTUxOTIyNDcuanBlZz9hdXRvPWNvbXByZXNzJmNzPXRpbnlzcmdiJmg9MzUwIiwiaWQiOjMsInVzZXJuYW1lIjoiQm9iYmllRTMwIiwic3ViIjoiYm9iLmpvaG5zb25AZXhhbXBsZS5jb20iLCJpYXQiOjE3MTgxMTUxNjgsImV4cCI6MTcxODE1MTE2OH0.ltx9ppoa8C3eSqtFGRCv7xdsiqTdwxaYsJykTjsDmtc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"New Thread\",\n\t\"message\": \"Thread content\",\n\t\"creatorId\": 1,\n    \"vehicleId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/threads",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"threads"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Thread",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Updated Thread\",\n\t\"content\": \"Updated content\",\n\t\"userId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/threads/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"threads",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close Thread",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwiaWQiOjMsInVzZXJuYW1lIjoiQm9iYmllRTMwIiwic3ViIjoiYm9iLmpvaG5zb25AZXhhbXBsZS5jb20iLCJpYXQiOjE3MTgxMDE5MTAsImV4cCI6MTcxODEzNzkxMH0.0qyfVuO2UMJ2wYt65Ny1HJ1TDAdxky3W6I0WntGZDW0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/threads/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"threads",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Thread",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/threads/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"threads",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ThreadPost",
+			"item": [
+				{
+					"name": "Get All ThreadPosts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/threadposts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"threadposts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ThreadPost by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwidXNlcm5hbWUiOiJCb2JiaWVFMzAiLCJzdWIiOiJib2Iuam9obnNvbkBleGFtcGxlLmNvbSIsImlhdCI6MTcxODAxODE4NywiZXhwIjoxNzE4MDU0MTg3fQ.RQLn8_SIrYnpvoMI90RSEZgXboi8kfSHG7H905zi8tI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/threadposts/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"threadposts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create ThreadPost",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJyZWxpYWJsZSI6dHJ1ZSwicm9sZSI6IkFETUlOIiwidXNlcm5hbWUiOiJCb2JiaWVFMzAiLCJzdWIiOiJib2Iuam9obnNvbkBleGFtcGxlLmNvbSIsImlhdCI6MTcxODAxODczNywiZXhwIjoxNzE4MDU0NzM3fQ.XmQCdMOqMjdNwcvNHbsAGGokGQtP5Uv6iWziZ2Jvk7g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"message\": \"New ThreadPost content\",\n\t\"thread\": 1,\n\t\"user\": 1\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/threadposts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"threadposts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete ThreadPost",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/threadposts/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"threadposts",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "Get All Vehicles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlhdCI6MTcxNzg0NjU0MywiZXhwIjoxNzE3ODgyNTQzfQ.4aaFOzoQ3dKS5CHv0-u33FwveEmpGt7Zhms10LvESPY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/vehicles",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicle by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/vehicles/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vehicles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Vehicle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"brand\": \"Toyota\",\n\t\"model\": \"Corolla\",\n\t\"creationDate\": \"2023-01-01\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/vehicles",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Vehicle",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"brand\": \"Honda\",\n\t\"model\": \"Civic\",\n\t\"creationDate\": \"2023-02-01\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/vehicles/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vehicles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vehicle",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/vehicles/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vehicles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"bob.johnson@example.com\",\r\n    \"password\":\"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"username\",\r\n    \"email\": \"example@example.com\",\r\n    \"password\": \"pasdasdw\",\r\n    \"bio\": \"my biography\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localUrl",
+			"value": "http://localhost:8080/api",
+			"type": "string"
+		}
+	]
+}
