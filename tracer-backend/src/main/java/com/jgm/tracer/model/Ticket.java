@@ -34,4 +34,8 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "infractor_id", nullable = false)
     private User infractor;
+
+    @ManyToOne
+    @JoinColumn(name = "thread_id", nullable= false)
+    private Thread thread;
 }
