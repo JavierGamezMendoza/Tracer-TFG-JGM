@@ -74,6 +74,36 @@ const UserService = {
       console.error(`Error al dejar de seguir el hilo con ID ${id}:`, error);
       return null;
     }
+  },
+
+  blockUser: async (id) => {
+    try {
+      const response = await axiosInstance.patch(`/users/block/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error al bloquear al usuario con ID ${id}:`, error);
+      return null;
+    }
+  },
+
+  unBlockUser: async (id) => {
+    try {
+      const response = await axiosInstance.patch(`/users/unblock/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error al desbloquear al usuario con ID ${id}:`, error);
+      return null;
+    }
+  },
+
+  getBlockedUsers: async () => {
+    try {
+      const response = await axiosInstance.get(`/users/blocked`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error al obtener los usuarios bloqueados:`, error);
+      return null;
+    }
   }
 };
 

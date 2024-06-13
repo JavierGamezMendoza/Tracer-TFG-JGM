@@ -65,9 +65,17 @@ public class User implements UserDetails {
 
     @ManyToMany
     @JoinTable(
+            name = "UserBlockUser",
+            joinColumns = @JoinColumn(name = "blockerId"),
+            inverseJoinColumns = @JoinColumn(name = "blockedId")
+    )
+    private Set<User> blocked;
+
+    @ManyToMany
+    @JoinTable(
             name = "UserUser",
-            joinColumns = @JoinColumn(name = "followersId"),
-            inverseJoinColumns = @JoinColumn(name = "followsId")
+            joinColumns = @JoinColumn(name = "followerId"),
+            inverseJoinColumns = @JoinColumn(name = "followedId")
     )
     private Set<User> follows;
 

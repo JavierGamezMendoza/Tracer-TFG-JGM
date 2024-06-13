@@ -2,10 +2,7 @@ package com.jgm.tracer.service.impl;
 
 import com.jgm.tracer.model.Thread;
 import com.jgm.tracer.model.Vehicle;
-import com.jgm.tracer.model.dto.PostUserDTO;
-import com.jgm.tracer.model.dto.UserDTO;
-import com.jgm.tracer.model.dto.UserResponse;
-import com.jgm.tracer.model.dto.VehicleDTO;
+import com.jgm.tracer.model.dto.*;
 import com.jgm.tracer.repository.ThreadRepository;
 import com.jgm.tracer.repository.ThreadpostRepository;
 import com.jgm.tracer.model.User;
@@ -121,6 +118,24 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User blockUser(final Long idBlockedUser, final Long idBlockerUser){
+        User blockerUser = userRepository.getReferenceById(idBlockerUser);
+        User blockedUser = userRepository.getReferenceById(idBlockedUser);
+
+        blockerUser.getBlocked().add(blockedUser);
+
+        return userRepository.save(blockerUser);
+    }
+
+    public User unBlockUser(final Long idBlockedUser, final Long idBlockerUser){
+        User blockerUser = userRepository.getReferenceById(idBlockerUser);
+        User blockedUser = userRepository.getReferenceById(idBlockedUser);
+
+        blockerUser.getBlocked().remove(blockedUser);
+
+        return userRepository.save(blockerUser);
+    }
+
     public void delete(final Long id) {
         userRepository.deleteById(id);
     }
@@ -132,6 +147,15 @@ public class UserService {
     }
     private UserDTO convertToDto(User user) {
         return modelMapper.map(user, UserDTO.class);
+    }
+
+    public List<UserInUserDTO> convertToMinUserDTOList(List<User> users) {
+        return users.stream()
+                .map(this::convertToMinUserDto)
+                .collect(Collectors.toList());
+    }
+    private UserInUserDTO convertToMinUserDto(User user) {
+        return modelMapper.map(user, UserInUserDTO.class);
     }
 }
 

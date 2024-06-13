@@ -15,6 +15,7 @@ import { IoShieldCheckmark } from 'react-icons/io5';
 import { Tooltip } from 'react-tooltip'
 import { FaRegCheckCircle, FaHeart } from "react-icons/fa";
 import UserService from '../../services/userService';
+import BlockUserButton from '../../components/block-user-button/blockUserButton';
 
 const Threadposts = () => {
     const { id } = useParams();
@@ -22,8 +23,16 @@ const Threadposts = () => {
     const [threadPosts, setThreadPosts] = useState(null)
     const [message, setMessage] = useState("");
     const [currentUser, setCurrentUser] = useState(null);
+    const [blockedUsers, setBlockedUsers] = useState([]);
+
+    const fetchBlockedUsers = async () => {
+        const users = await UserService.getBlockedUsers();
+        console.log(users)
+        setBlockedUsers(users);
+    };
 
     const fetchThreadposts = async () => {
+        fetchBlockedUsers();
         const threadById = await threadService.getThreadById(id);
         setThread(threadById);
         setThreadPosts(dateService.sortByCreationDate(threadById.threadposts));
@@ -80,6 +89,7 @@ const Threadposts = () => {
     useEffect(() => {
         console.log("EL ID ES:", id)
         fetchCurrentUser();
+        fetchBlockedUsers();
         fetchThreadposts();
     }, []);
 
@@ -115,8 +125,7 @@ const Threadposts = () => {
     };
     return (
         <div>
-
-            <Container>
+            <Container className='mb-5'>
 
                 <Row className='justify-content-center align-items-center m-3' xs={1} md={1} lg={1} xl={12}>
                     <Card className={styles.card}>
@@ -133,8 +142,22 @@ const Threadposts = () => {
                                     />
                                     <label className={`${styles.checkbox}`} htmlFor="btn-check"><FaHeart></FaHeart></label>
                                 </div>
-                                <div className='align-items-center justify-content-center'>
-                                    <Image className={styles.profilePic} src={thread.creator.img} /> {thread.creator.username}
+                                <div className='d-flex justify-content-between'>
+                                    <div className='d-flex align-items-center justify-content-center'>
+                                        <Image
+                                            className={styles.profilePic}
+                                            src={thread.creator.profilePic}
+                                            roundedCircle
+                                            style={{ width: 20, height: 20 }}
+                                        />
+                                        <div className='ms-2'> {thread.creator.username} </div>
+                                        {thread.creator.reliable &&
+                                            <div className='d-flex align-items-center justify-content-center'>
+                                                <IoShieldCheckmark className={`${styles.reliable} ms-2`} data-tooltip-id="my-tooltip" data-tooltip-content="This is a Reliable user" />
+                                                <Tooltip id="my-tooltip" />
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                             <hr />
@@ -171,39 +194,74 @@ const Threadposts = () => {
                 </Row>
 
                 {threadPosts.map((threadpost, index) => (
-                    <Row className='justify-content-center align-items-center m-3' key={index} >
-                        <Card>
-                            <Card.Body>
-                                <div className='d-flex justify-content-between'>
-                                    <div>
-                                        <p className='text-secondary'>{dateService.formatDate(threadpost.creationDate)}</p>
-                                    </div>
-                                    <div className='d-flex align-items-center justify-content-center'>
-                                        <Image className={styles.profilePic} src={threadpost.user.img} /> {threadpost.user.username}
-                                        {threadpost.user.reliable &&
-                                            <div className='d-flex align-items-center justify-content-center'>
-                                                <IoShieldCheckmark className={`${styles.reliable} ms-2`} data-tooltip-id="my-tooltip" data-tooltip-content="This is a Reliable user" />
-                                                <Tooltip id="my-tooltip" />
+                    !blockedUsers.some(user => user.id === threadpost.user.id) ? (
+                        <Row className='justify-content-center align-items-center m-3' key={index} >
+                            <Card>
+                                <Card.Body>
+                                    <div className='d-flex justify-content-between'>
+                                        <div>
+                                            <p className='text-secondary'>{dateService.formatDate(threadpost.creationDate)}</p>
+                                        </div>
+                                        <div className='d-flex align-items-center justify-content-center'>
+                                            <Image
+                                                className={styles.profilePic}
+                                                src={threadpost.user.profilePic}
+                                                roundedCircle
+                                                style={{ width: 20, height: 20 }}
+                                            />
+                                            <div className='ms-2'> {threadpost.user.username}
                                             </div>
+                                            {threadpost.user.reliable &&
+                                                <div className='d-flex align-items-center justify-content-center'>
+                                                    <IoShieldCheckmark className={`${styles.reliable} ms-2`} data-tooltip-id="my-tooltip" data-tooltip-content="This is a Reliable user" />
+                                                    <Tooltip id="my-tooltip" />
+                                                </div>
+                                            }
+                                            {threadpost.user.id != currentUser.id &&
+                                                <BlockUserButton mode="block" userId={threadpost.user.id} fetch={fetchThreadposts} />
+                                            }
 
-                                        }
+                                        </div>
                                     </div>
-                                </div>
-                                <div className='d-flex justify-content-between align-items-center mt-3 mb-3'>
-                                    {threadpost.message}
-                                </div>
-                                {thread.closeDate == null && threadpost.user.id != currentUser.id && thread.creator.id == currentUser.id &&
-                                    <div >
-                                        <button onClick={closeThread} className={`${styles.solvedButton} d-flex justify-content-center align-items-center`}><FaRegCheckCircle className='me-1' /> Mark as solved</button>
+                                    <div className='d-flex justify-content-between align-items-center mt-3 mb-3'>
+                                        {threadpost.message}
                                     </div>
-                                }
-                            </Card.Body>
-                        </Card>
-                    </Row>
+                                    {thread.closeDate == null && threadpost.user.id != currentUser.id && thread.creator.id == currentUser.id &&
+                                        <div >
+                                            <button onClick={closeThread} className={`${styles.solvedButton} d-flex justify-content-center align-items-center`}><FaRegCheckCircle className='me-1' /> Mark as solved</button>
+                                        </div>
+                                    }
+                                </Card.Body>
+                            </Card>
+                        </Row>
+                    )
+                        :
+                        (
+                            <Row className='justify-content-center align-items-center m-3' key={index} xs={1} md={1} lg={1} xl={12}>
+                                <Card>
+                                    <Card.Body>
+                                        <div className='d-flex justify-content-end'>
+                                            <div className='d-flex align-items-center justify-content-end'>
+                                                <Image
+                                                    className={styles.profilePic}
+                                                    src={threadpost.user.profilePic}
+                                                    roundedCircle
+                                                    style={{ width: 20, height: 20 }}
+                                                />
+                                                <div className='ms-2'> {threadpost.user.username} </div>
+                                                <BlockUserButton mode="unblock" userId={threadpost.user.id} fetch={fetchThreadposts} />
+                                            </div>
+                                        </div>
+                                        <div className='mt-4 mb-4 bg-light p-4 rounded text-center'>
+                                            This user is <b>blocked</b> and you will not see their communications.
+                                        </div>
+                                    </Card.Body>
+                                </Card>
+                            </Row>
+                        )
                 ))}
-
-
             </Container>
+
             <Row className={`${styles.postContainer} m-auto justify-content-center align-items-center col-10`}>
                 <div className={`${styles.customInput} input-group`}>
                     <textarea
@@ -214,6 +272,7 @@ const Threadposts = () => {
                         onKeyDown={handleKeyDown}
                         style={{ height: `${message.split('\n').length * 1.2}em` }} // Ajusta la altura según las líneas de texto
                         aria-label="With textarea"
+                        disabled={thread.closeDate != null}
                     />
                     <button onClick={sendPost} className={`${styles.customButton} input-group-text`} id="addon-wrapping">
                         <GoPaperAirplane></GoPaperAirplane>

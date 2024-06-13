@@ -19,3 +19,7 @@
 .link{
     text-decoration: none;
 }
+
+.reliable {
+    fill: rgb(228, 175, 0);
+}

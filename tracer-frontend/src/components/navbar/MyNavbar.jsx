@@ -18,7 +18,7 @@ const MyNavbar = ({currentUser}) => {
                         <Nav.Link as={Link} to="/">Inicio</Nav.Link>
                         <Nav.Link as={Link} to="/users">Usuarios</Nav.Link>
                         <NavDropdown
-                            title={<Image src={currentUser.profilePic} roundedCircle width="20" height="20" />}
+                            title={<Image src={currentUser?.profilePic} roundedCircle width="20" height="20" />}
                             id="basic-nav-dropdown"
                             className="custom-dropdown d-sm-none d-lg-block"
                             align="end"

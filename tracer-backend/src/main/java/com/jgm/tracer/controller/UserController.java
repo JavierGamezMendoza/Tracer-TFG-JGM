@@ -1,10 +1,7 @@
 package com.jgm.tracer.controller;
 
 import com.jgm.tracer.model.User;
-import com.jgm.tracer.model.dto.PostUserDTO;
-import com.jgm.tracer.model.dto.UserDTO;
-import com.jgm.tracer.model.dto.UserResponse;
-import com.jgm.tracer.model.dto.VehicleDTO;
+import com.jgm.tracer.model.dto.*;
 import com.jgm.tracer.service.impl.ThreadService;
 import com.jgm.tracer.service.impl.UserService;
 import com.jgm.tracer.service.impl.VehicleService;
@@ -99,6 +96,33 @@ public class UserController {
             @AuthenticationPrincipal User userDetails
     ){
         userService.unFollowVehicle(id, userDetails.getId());
+    }
+
+    @PatchMapping("/block/{id}")
+    @ApiResponse(responseCode = "201")
+    public void blockUser(
+            @PathVariable(name = "id") final Long id,
+            @AuthenticationPrincipal User userDetails
+    ){
+        userService.blockUser(id, userDetails.getId());
+    }
+
+    @GetMapping("/blocked")
+    @ApiResponse(responseCode = "201")
+    public ResponseEntity<List<UserInUserDTO>> blockedUsers( @AuthenticationPrincipal User userDetails){
+       User user = userService.get(userDetails.getId());
+
+       List<UserInUserDTO> blockedDTO = userService.convertToMinUserDTOList(user.getBlocked().stream().toList());
+       return ResponseEntity.ok(blockedDTO);
+    }
+
+    @PatchMapping("/unblock/{id}")
+    @ApiResponse(responseCode = "201")
+    public void unBlockUser(
+            @PathVariable(name = "id") final Long id,
+            @AuthenticationPrincipal User userDetails
+    ){
+        userService.unBlockUser(id, userDetails.getId());
     }
 
 }
