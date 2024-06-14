@@ -13,10 +13,11 @@ import threadService from '../../services/threadService';
 import authService from '../../services/authService';
 import { BsThreeDots } from 'react-icons/bs';
 import { Dropdown } from 'react-bootstrap';
-import BlockUserButton from '../../components/block-user-button/blockUserButton';
+import BlockUserButton from '../../components/block-user-button/optionsButton';
 import UserService from '../../services/userService';
 import { IoShieldCheckmark } from 'react-icons/io5';
 import { Tooltip } from 'react-tooltip';
+import OptionsButton from '../../components/block-user-button/optionsButton';
 
 const VehicleFeed = () => {
   const { id } = useParams();
@@ -203,7 +204,14 @@ const VehicleFeed = () => {
                       </div>
                     }
                     {thread.creator.id != currentUser.id &&
-                      <BlockUserButton mode="block" userId={thread.creator.id} fetch={fetchVehicle} />
+                      <OptionsButton
+                        mode="block"
+                        userId={thread.creator.id}
+                        fetch={fetchVehicle}
+                        userRole={currentUser.role}
+                        type="thread"
+                        threadId={thread.id}
+                      />
                     }
                   </div>
                 </div>

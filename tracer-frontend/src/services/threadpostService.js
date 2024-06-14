@@ -46,7 +46,7 @@ const threadpostService = {
   // Método para eliminar un vehículo
   deleteThreadpost: async (id) => {
     try {
-      const response = await axiosInstance.delete('/threadposts');
+      const response = await axiosInstance.delete(`/threadposts/${id}`);
       return response.data;
     } catch (error) {
       console.error(`Error al eliminar el vehículo con ID ${id}:`, error);

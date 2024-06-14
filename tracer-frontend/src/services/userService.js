@@ -104,7 +104,17 @@ const UserService = {
       console.error(`Error al obtener los usuarios bloqueados:`, error);
       return null;
     }
-  }
+  },
+
+  banUser: async (id) => {
+    try {
+      const response = await axiosInstance.delete(`/users/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error al vetar al usuario con ID ${id}:`, error);
+      return null;
+    }
+  },
 };
 
 export default UserService;

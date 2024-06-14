@@ -15,7 +15,8 @@ import { IoShieldCheckmark } from 'react-icons/io5';
 import { Tooltip } from 'react-tooltip'
 import { FaRegCheckCircle, FaHeart } from "react-icons/fa";
 import UserService from '../../services/userService';
-import BlockUserButton from '../../components/block-user-button/blockUserButton';
+import BlockUserButton from '../../components/block-user-button/optionsButton';
+import OptionsButton from '../../components/block-user-button/optionsButton';
 
 const Threadposts = () => {
     const { id } = useParams();
@@ -218,7 +219,15 @@ const Threadposts = () => {
                                                 </div>
                                             }
                                             {threadpost.user.id != currentUser.id &&
-                                                <BlockUserButton mode="block" userId={threadpost.user.id} fetch={fetchThreadposts} />
+                                                <OptionsButton 
+                                                    mode="block" 
+                                                    userId={threadpost.user.id} 
+                                                    fetch={fetchThreadposts} 
+                                                    userRole={currentUser.role}
+                                                    type="threadpost"
+                                                    threadPostId={threadpost.id}
+                                                    threadId={thread.id}
+                                                />
                                             }
 
                                         </div>
@@ -249,7 +258,7 @@ const Threadposts = () => {
                                                     style={{ width: 20, height: 20 }}
                                                 />
                                                 <div className='ms-2'> {threadpost.user.username} </div>
-                                                <BlockUserButton mode="unblock" userId={threadpost.user.id} fetch={fetchThreadposts} />
+                                                <OptionsButton mode="unblock" userId={threadpost.user.id} fetch={fetchThreadposts} />
                                             </div>
                                         </div>
                                         <div className='mt-4 mb-4 bg-light p-4 rounded text-center'>

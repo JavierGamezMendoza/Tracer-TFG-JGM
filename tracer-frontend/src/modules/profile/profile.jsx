@@ -79,7 +79,15 @@ const Profile = () => {
                                     type="email"
                                     name="email"
                                     value={user?.email || ''}
-                                    onChange={handleChange}
+                                    disabled
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Role</Form.Label>
+                                <Form.Control
+                                    type="role"
+                                    name="role"
+                                    value={user?.role || ''}
                                     disabled
                                 />
                             </Form.Group>
