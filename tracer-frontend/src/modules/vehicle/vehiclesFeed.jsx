@@ -266,7 +266,12 @@ const VehicleFeed = () => {
                         style={{ width: 20, height: 20 }}
                       />
                       <div className='ms-2'> {thread.creator.username} </div>
-                      <BlockUserButton mode="unblock" userId={thread.creator.id} fetch={fetchVehicle} />
+                      <BlockUserButton 
+                        mode="unblock" 
+                        userId={thread.creator.id} 
+                        fetch={fetchVehicle} 
+                        userRole={currentUser.role}
+                      />
                     </div>
                   </div>
                   <div className='mt-4 mb-4 bg-light p-4 rounded text-center'>

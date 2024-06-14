@@ -41,14 +41,14 @@ const OptionsButton = ({ mode, userId, fetch, userRole, type, threadPostId, thre
                 <BsThreeDots style={{ color: 'grey' }} />
             </Dropdown.Toggle>
 
-            {mode == "block" && userRole == "USER" && type == "thread" &&
+            {mode == "block" && userRole == "USER" && 
                 <Dropdown.Menu>
                     <Dropdown.Item onClick={blockUser}>Block User</Dropdown.Item>
-                    <Dropdown.Item >Report User</Dropdown.Item>
+                    {/* <Dropdown.Item >Report User</Dropdown.Item> */}
                 </Dropdown.Menu>
             }
 
-            {mode == "unblock" && userRole == "USER" && type == "thread" &&
+            {mode == "unblock" && userRole == "USER" &&
                 <Dropdown.Menu>
                     <Dropdown.Item onClick={unBlockUser}>Unblock User</Dropdown.Item>
                 </Dropdown.Menu>

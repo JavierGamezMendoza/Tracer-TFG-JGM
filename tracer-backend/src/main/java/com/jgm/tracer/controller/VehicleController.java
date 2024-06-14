@@ -2,6 +2,7 @@ package com.jgm.tracer.controller;
 
 import com.jgm.tracer.model.Thread;
 import com.jgm.tracer.model.Vehicle;
+import com.jgm.tracer.model.dto.PostVehicleDTO;
 import com.jgm.tracer.model.dto.ThreadDTO;
 import com.jgm.tracer.model.dto.VehicleDTO;
 import com.jgm.tracer.service.impl.VehicleService;
@@ -60,8 +61,9 @@ public class VehicleController {
 
     @PostMapping
     @ApiResponse(responseCode = "201")
-    public ResponseEntity<Vehicle> createVehicle(@RequestBody @Valid final VehicleDTO vehicleDTO) {
-        final Vehicle createdVehicle = vehicleService.create(vehicleDTO);
+    public ResponseEntity<Vehicle> createVehicle(@RequestBody @Valid final PostVehicleDTO postVehicleDTO) {
+        final Vehicle vehicleConverted = modelMapper.map(postVehicleDTO, Vehicle.class);
+        final Vehicle createdVehicle = vehicleService.create(vehicleConverted);
         return new ResponseEntity<>(createdVehicle, HttpStatus.CREATED);
     }
 

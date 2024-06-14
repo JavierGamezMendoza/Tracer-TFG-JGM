@@ -43,8 +43,7 @@ public class VehicleService {
                 .orElseThrow(NotFoundException::new);
     }
 
-    public Vehicle create(final VehicleDTO vehicleDTO) {
-        final Vehicle vehicle = modelMapper.map(vehicleDTO, Vehicle.class);
+    public Vehicle create(final Vehicle vehicle) {
         return vehicleRepository.save(vehicle);
     }
 
