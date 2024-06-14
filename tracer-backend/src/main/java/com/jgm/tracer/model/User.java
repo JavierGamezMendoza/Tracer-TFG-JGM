@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,6 +26,7 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(nullable = false, unique = true, length = 40)
+    @NotBlank
     private String username;
 
     @Column(nullable = false, name = "\"role\"")
@@ -34,9 +37,11 @@ public class User implements UserDetails {
     private String profilePic;
 
     @Column(nullable = false)
+    @NotBlank
     private String password;
 
     @Column(nullable = false, length = 40)
+    @NotBlank
     private String email;
 
     @Column

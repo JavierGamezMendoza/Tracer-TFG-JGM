@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +27,7 @@ public class Threadpost {
     private Long id;
 
     @Column(nullable = false)
+    @NotBlank
     private String message;
 
     @Column(nullable = false)

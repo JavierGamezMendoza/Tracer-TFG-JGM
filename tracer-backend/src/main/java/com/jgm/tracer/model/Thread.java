@@ -13,6 +13,8 @@ import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
+
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,9 +30,11 @@ public class Thread {
     private Long id;
 
     @Column(nullable = false, length = 40)
+    @NotBlank
     private String title;
 
     @Column(nullable = false, length = 200)
+    @NotBlank
     private String message;
 
     @Column(nullable = false)

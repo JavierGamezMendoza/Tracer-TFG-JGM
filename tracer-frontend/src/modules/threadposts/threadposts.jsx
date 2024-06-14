@@ -219,10 +219,10 @@ const Threadposts = () => {
                                                 </div>
                                             }
                                             {threadpost.user.id != currentUser.id &&
-                                                <OptionsButton 
-                                                    mode="block" 
-                                                    userId={threadpost.user.id} 
-                                                    fetch={fetchThreadposts} 
+                                                <OptionsButton
+                                                    mode="block"
+                                                    userId={threadpost.user.id}
+                                                    fetch={fetchThreadposts}
                                                     userRole={currentUser.role}
                                                     type="threadpost"
                                                     threadPostId={threadpost.id}
@@ -283,11 +283,17 @@ const Threadposts = () => {
                         aria-label="With textarea"
                         disabled={thread.closeDate != null}
                     />
-                    <button onClick={sendPost} className={`${styles.customButton} input-group-text`} id="addon-wrapping">
-                        <GoPaperAirplane></GoPaperAirplane>
+                    <button
+                        onClick={sendPost}
+                        className={`${styles.customButton} input-group-text`}
+                        id="addon-wrapping"
+                        disabled={!message.trim()} // Deshabilitar si el mensaje está vacío o contiene solo espacios
+                    >
+                        <GoPaperAirplane />
                     </button>
                 </div>
             </Row>
+
         </div>
 
 
