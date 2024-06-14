@@ -50,7 +50,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.GET, "/api/v1/threadposts/**").hasAnyAuthority(Role.USER.toString(), Role.ADMIN.toString())
                                 .requestMatchers(HttpMethod.GET, "/api/v1/users/**").hasAnyAuthority(Role.USER.toString(), Role.ADMIN.toString())
 
-                                .requestMatchers(HttpMethod.POST, "/api/v1/vehicles/**").hasAnyAuthority(Role.USER.toString(), Role.ADMIN.toString())
+
                                 .requestMatchers(HttpMethod.POST, "/api/v1/threads/**").hasAnyAuthority(Role.USER.toString(), Role.ADMIN.toString())
                                 .requestMatchers(HttpMethod.POST, "/api/v1/threadposts/**").hasAnyAuthority(Role.USER.toString(), Role.ADMIN.toString())
 
@@ -65,6 +65,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.PATCH, "/api/v1/threadposts/**").hasAnyAuthority(Role.USER.toString(), Role.ADMIN.toString())
                                 .requestMatchers(HttpMethod.PATCH, "/api/v1/users/**").hasAnyAuthority(Role.USER.toString(), Role.ADMIN.toString())
 
+                                .requestMatchers(HttpMethod.POST, "/api/v1/vehicles/**").hasAuthority(Role.ADMIN.toString())
                                 .requestMatchers(HttpMethod.DELETE, "/api/v1/vehicles/**").hasAuthority(Role.ADMIN.toString())
                                 .requestMatchers(HttpMethod.DELETE, "/api/v1/threads/**").hasAuthority(Role.ADMIN.toString())
                                 .requestMatchers(HttpMethod.DELETE, "/api/v1/threadposts/**").hasAuthority(Role.ADMIN.toString())

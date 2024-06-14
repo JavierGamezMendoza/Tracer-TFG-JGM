@@ -96,7 +96,7 @@ const Feed = () => {
       unFollowVehicle(id);
     }
   };
-  
+
   const toggleForm = () => {
     setShowForm(!showForm);
   };
@@ -199,64 +199,68 @@ const Feed = () => {
         <>
           {showForm ? (
             <Row className="justify-content-center ms-5 me-5">
-              <Card>
-                <Card.Body>
-                  <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Brand</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter Brand"
-                        name="brand"
-                        value={formData.brand}
-                        onChange={handleChange}
-                        isInvalid={!!formErrors.brand}
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        {formErrors.brand}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Model</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        rows={3}
-                        placeholder="Enter Model"
-                        name="model"
-                        value={formData.model}
-                        onChange={handleChange}
-                        isInvalid={!!formErrors.model}
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        {formErrors.model}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Creation Date</Form.Label>
-                      <Form.Control
-                        type="date"
-                        name="creationDate"
-                        value={formData.creationDate}
-                        onChange={handleChange}
-                        isInvalid={!!formErrors.creationDate}
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        {formErrors.creationDate}
-                      </Form.Control.Feedback>
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                      Submit
-                    </Button>
-                    <Button variant="secondary" onClick={handleCancel} className="ms-2">
-                      Cancel <FaTimes className='ms-1' />
-                    </Button>
-                  </Form>
-                </Card.Body>
-              </Card>
+              <Col xs={12} md={8}>
+                <Card>
+                  <Card.Body>
+                    <Form onSubmit={handleSubmit}>
+                      <Form.Group className="mb-3">
+                        <Form.Label>Brand</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter Brand"
+                          name="brand"
+                          value={formData.brand}
+                          onChange={handleChange}
+                          isInvalid={!!formErrors.brand}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {formErrors.brand}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group className="mb-3">
+                        <Form.Label>Model</Form.Label>
+                        <Form.Control
+                          as="textarea"
+                          rows={3}
+                          placeholder="Enter Model"
+                          name="model"
+                          value={formData.model}
+                          onChange={handleChange}
+                          isInvalid={!!formErrors.model}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {formErrors.model}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Form.Group className="mb-3">
+                        <Form.Label>Creation Date</Form.Label>
+                        <Form.Control
+                          type="date"
+                          name="creationDate"
+                          value={formData.creationDate}
+                          onChange={handleChange}
+                          isInvalid={!!formErrors.creationDate}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                          {formErrors.creationDate}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                      <Button variant="primary" type="submit">
+                        Submit
+                      </Button>
+                      <Button variant="secondary" onClick={handleCancel} className="ms-2">
+                        Cancel <FaTimes className='ms-1' />
+                      </Button>
+                    </Form>
+                  </Card.Body>
+                </Card>
+              </Col>
             </Row>
           ) : (
             <Row className="ms-5 me-5">
-              <Button onClick={toggleForm} className='d-flex align-items-center justify-content-center '>Add Vehicle <FaPlus className='ms-2' /></Button>
+              <Col xs={12} md={8}>
+                <Button onClick={toggleForm} className='d-flex align-items-center justify-content-center '>Add Vehicle <FaPlus className='ms-2' /></Button>
+              </Col>
             </Row>
           )}
         </>
