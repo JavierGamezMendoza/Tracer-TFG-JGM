@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import jakarta.validation.constraints.NotBlank;
@@ -13,7 +12,6 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 
 @Entity
 @Getter
@@ -91,10 +89,23 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "creator", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Thread> createdThreads;
 
+    @PreRemove
+    private void removeFollows() {
+        // Remover este usuario de los seguidores de otros usuarios
+        for (User follower : followers) {
+            follower.getFollows().remove(this);
+        }
+        // Limpiar los seguidores de este usuario
+        this.getFollowers().clear();
+        // Limpiar los seguidos de este usuario
+        this.getFollows().clear();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(role.toString()));
     }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

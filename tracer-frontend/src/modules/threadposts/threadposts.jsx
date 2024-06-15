@@ -225,7 +225,7 @@ const Threadposts = () => {
                                                     fetch={fetchThreadposts}
                                                     userRole={currentUser.role}
                                                     type="threadpost"
-                                                    threadPostId={threadpost.id}
+                                                    threadPost={threadpost}
                                                     threadId={thread.id}
                                                 />
                                             }

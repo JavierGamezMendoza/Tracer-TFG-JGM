@@ -6,8 +6,11 @@ import UserService from '../../services/userService';
 import threadpostService from '../../services/threadpostService';
 import { ImBin } from 'react-icons/im';
 import threadService from '../../services/threadService';
+import { useNavigate } from 'react-router';
 
-const OptionsButton = ({ mode, userId, fetch, userRole, type, threadPostId, threadId }) => {
+const OptionsButton = ({ mode, userId, fetch, userRole, type, threadPost, threadId }) => {
+
+    const navigate = useNavigate();
 
     const blockUser = async () => {
         await UserService.blockUser(userId);
@@ -20,7 +23,7 @@ const OptionsButton = ({ mode, userId, fetch, userRole, type, threadPostId, thre
     }
 
     const deletePost = async () => {
-        await threadpostService.deleteThreadpost(threadPostId);
+        await threadpostService.deleteThreadpost(threadPost.id);
         fetch();
     }
 
@@ -31,7 +34,11 @@ const OptionsButton = ({ mode, userId, fetch, userRole, type, threadPostId, thre
 
     const banUser = async () => {
         await UserService.banUser(userId);
-        fetch();
+        if (threadPost.user.id == userId) {
+            navigate(`/`)
+        } else {
+            fetch();
+        }
     }
 
     return (
@@ -41,7 +48,7 @@ const OptionsButton = ({ mode, userId, fetch, userRole, type, threadPostId, thre
                 <BsThreeDots style={{ color: 'grey' }} />
             </Dropdown.Toggle>
 
-            {mode == "block" && userRole == "USER" && 
+            {mode == "block" && userRole == "USER" &&
                 <Dropdown.Menu>
                     <Dropdown.Item onClick={blockUser}>Block User</Dropdown.Item>
                     {/* <Dropdown.Item >Report User</Dropdown.Item> */}
