@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 
@@ -17,7 +18,7 @@ public class VehicleDTO {
     private String brand;
     private String model;
     private LocalDate creationDate;
-    private Set<UserDTO> followers;
+    private Set<UserInUserDTO> followers;
     private Set<ThreadDTO> threads;
 }
 

@@ -118,6 +118,24 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User followUser(final Long idVehicle, final Long idUser){
+        User followedUser = userRepository.getReferenceById(idVehicle);
+        User followerUser = userRepository.getReferenceById(idUser);
+
+        followerUser.getFollows().add(followedUser);
+
+        return userRepository.save(followerUser);
+    }
+
+    public User unFollowUser(final Long idVehicle, final Long idUser){
+        User followedUser = userRepository.getReferenceById(idVehicle);
+        User followerUser = userRepository.getReferenceById(idUser);
+
+        followerUser.getFollows().remove(followedUser);
+
+        return userRepository.save(followerUser);
+    }
+
     public User blockUser(final Long idBlockedUser, final Long idBlockerUser){
         User blockerUser = userRepository.getReferenceById(idBlockerUser);
         User blockedUser = userRepository.getReferenceById(idBlockedUser);

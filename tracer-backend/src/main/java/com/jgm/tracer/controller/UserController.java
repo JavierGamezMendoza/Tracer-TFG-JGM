@@ -95,7 +95,25 @@ public class UserController {
             @PathVariable(name = "id") final Long id,
             @AuthenticationPrincipal User userDetails
     ){
-        userService.unFollowVehicle(id, userDetails.getId());
+        userService.unFollowUser(id, userDetails.getId());
+    }
+
+    @PatchMapping("/follow/{id}")
+    @ApiResponse(responseCode = "201")
+    public void followUser(
+            @PathVariable(name = "id") final Long id,
+            @AuthenticationPrincipal User userDetails
+    ){
+        userService.followUser(id, userDetails.getId());
+    }
+
+    @PatchMapping("/unfollow/{id}")
+    @ApiResponse(responseCode = "201")
+    public void unFollowUser(
+            @PathVariable(name = "id") final Long id,
+            @AuthenticationPrincipal User userDetails
+    ){
+        userService.unFollowUser(id, userDetails.getId());
     }
 
     @PatchMapping("/block/{id}")

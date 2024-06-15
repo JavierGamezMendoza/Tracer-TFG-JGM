@@ -257,7 +257,7 @@ const Feed = () => {
               </Col>
             </Row>
           ) : (
-            <Row className="ms-5 me-5">
+            <Row className="ms-md-5 me-md-5">
               <Col xs={12} md={8}>
                 <Button onClick={toggleForm} className='d-flex align-items-center justify-content-center '>Add Vehicle <FaPlus className='ms-2' /></Button>
               </Col>
@@ -265,7 +265,7 @@ const Feed = () => {
           )}
         </>
       )}
-      <Row className='justify-content-start d-flex flex-wrap ms-5 me-5'>
+      <Row className='justify-content-start d-flex flex-wrap ms-md-5 me-md-5'>
         {filteredVehicles.map((vehicle, index) => (
           <Col key={index} xs={12} sm={12} md={6} lg={4} xl={4} className='mt-4 justify-content-left'>
             <Card>

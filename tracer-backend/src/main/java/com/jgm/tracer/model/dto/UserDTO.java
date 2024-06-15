@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,6 +17,6 @@ public class UserDTO {
     private String bio;
     private String profilePic;
     private Boolean reliable;
-    private List<UserInUserDTO> followers;
-    private List<UserInUserDTO> follows;
+    private Set<UserInUserDTO> followers;
+    private Set<UserInUserDTO> follows;
 }

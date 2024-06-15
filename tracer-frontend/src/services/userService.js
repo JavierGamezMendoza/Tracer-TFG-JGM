@@ -76,6 +76,27 @@ const UserService = {
     }
   },
 
+  followUser: async (id) => {
+    try {
+      const response = await axiosInstance.patch(`/users/follow/${id}`);
+      console.log(response)
+      return response.data;
+    } catch (error) {
+      console.error(`Error al seguir el usuario con ID ${id}:`, error);
+      return null;
+    }
+  },
+
+  unFollowUser: async (id) => {
+    try {
+      const response = await axiosInstance.patch(`/users/unfollow/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error al dejar de seguir el usuario con ID ${id}:`, error);
+      return null;
+    }
+  },
+
   blockUser: async (id) => {
     try {
       const response = await axiosInstance.patch(`/users/block/${id}`);

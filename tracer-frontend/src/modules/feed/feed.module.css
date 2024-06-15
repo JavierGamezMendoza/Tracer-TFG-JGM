@@ -35,14 +35,3 @@
   width: 15px;
   height: 15px;
 }
-
-.checkbox:checked + label {
-  color: rgb(0, 255, 0);
-  border: 2px solid #f00;
-}
-
-.checkboxFavorites:checked + label {
-  color: #33b148;
-  background-color: rgb(189, 90, 90);
-  border: 2px solid rgb(255, 255, 255);
-}

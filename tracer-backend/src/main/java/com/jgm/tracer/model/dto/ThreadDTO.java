@@ -19,7 +19,7 @@ public class ThreadDTO {
     private String message;
     private LocalDateTime creationDate;
     private LocalDateTime closeDate;
-    private Set<UserDTO> users;
-    private UserDTO creator;
+    private Set<UserInUserDTO> users;
+    private UserInUserDTO creator;
     private Set<ThreadpostDTO> threadposts;
 }

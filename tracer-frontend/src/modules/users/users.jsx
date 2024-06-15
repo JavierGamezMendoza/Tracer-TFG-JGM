@@ -1,24 +1,55 @@
 import React, { useEffect, useState } from 'react';
 import Loading from '../../components/loading/loading';
+import authService from '../../services/authService';
 import UserService from '../../services/userService';
+import { Container, Table, FormControl, InputGroup } from 'react-bootstrap';
+import { FaHeart } from "react-icons/fa";
 import styles from './users.module.css';
-import { Container, Table, Form, FormControl, InputGroup } from 'react-bootstrap';
 
 const Users = () => {
     const [users, setUsers] = useState(null);
     const [searchValue, setSearchValue] = useState('');
+    const [currentUser, setCurrentUser] = useState(null);
+
+    const fetchUsers = async () => {
+        const userList = await UserService.getAllUsers();
+        setUsers(userList);
+        fetchCurrentUser();
+    };
+
+    const fetchCurrentUser = async () => {
+        const user = authService.getCurrentUser();
+        const realUser = await UserService.getUserById(user.id);
+        console.log(realUser);
+        setCurrentUser(realUser);
+    };
 
     useEffect(() => {
-        const fetchUsers = async () => {
-            const userList = await UserService.getAllUsers();
-            setUsers(userList)
-        };
 
         fetchUsers();
+        fetchCurrentUser();
     }, []);
 
     const handleSearch = (e) => {
         setSearchValue(e.target.value);
+    };
+
+    const handleFavoriteToggle = async (userId) => {
+        try {
+            const isFavorited = currentUser.follows.some(followedUser => followedUser.id === userId);
+            if (isFavorited) {
+                await UserService.unFollowUser(userId);
+            } else {
+                await UserService.followUser(userId);
+            }
+
+            // Update current user and users list
+
+            fetchUsers();
+
+        } catch (error) {
+            console.error('Error updating favorites:', error);
+        }
     };
 
     const filteredUsers = users ? users.filter(user => {
@@ -29,7 +60,7 @@ const Users = () => {
         );
     }) : [];
 
-    if (!users) {
+    if (!users || !currentUser) {
         return <Loading />;
     }
 
@@ -53,19 +84,34 @@ const Users = () => {
                         <th>Bio</th>
                         <th>Followers</th>
                         <th>Follows</th>
+                        <th>Favorites</th>
                     </tr>
                 </thead>
                 <tbody>
                     {filteredUsers.map((user, index) => (
                         <tr key={index}>
                             <td>
-                                <img src={user.profilePic} className='rounded-circle' style={{ width: '50px', height: '50px' }}/>
+                                <img src={user.profilePic} className='rounded-circle' style={{ width: '50px', height: '50px' }} />
                             </td>
                             <td>{user.username}</td>
                             <td>{user.email}</td>
                             <td>{user.bio}</td>
                             <td>{user.followers.length}</td>
                             <td>{user.follows.length}</td>
+                            <td>
+                                <input
+                                    type="checkbox"
+                                    className='d-none'
+                                    id={`btn-check-${user.id}`}
+                                    autoComplete="off"
+                                    checked={currentUser.follows.some(followedUser => followedUser.id === user.id)}
+                                    onChange={() => handleFavoriteToggle(user.id)}
+                                    disabled={user.id == currentUser.id}
+                                />
+                                <label className={`${styles.checkbox} m-auto`} htmlFor={`btn-check-${user.id}`}>
+                                    <FaHeart className={currentUser.follows.some(followedUser => followedUser.id === user.id) ? styles.favorited : ''} />
+                                </label>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
