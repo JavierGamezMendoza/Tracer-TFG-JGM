@@ -8,7 +8,7 @@ import { ImBin } from 'react-icons/im';
 import threadService from '../../services/threadService';
 import { useNavigate } from 'react-router';
 
-const OptionsButton = ({ mode, userId, fetch, userRole, type, threadPost, threadId }) => {
+const OptionsButton = ({ mode, userId, fetch, userRole, type, threadPost, thread }) => {
 
     const navigate = useNavigate();
 
@@ -28,13 +28,13 @@ const OptionsButton = ({ mode, userId, fetch, userRole, type, threadPost, thread
     }
 
     const deleteThread = async () => {
-        await threadService.deleteThread(threadId);
+        await threadService.deleteThread(thread.id);
         fetch();
     }
 
     const banUser = async () => {
         await UserService.banUser(userId);
-        if (threadPost.user.id == userId) {
+        if (thread.creator.id == userId) {
             navigate(`/`)
         } else {
             fetch();

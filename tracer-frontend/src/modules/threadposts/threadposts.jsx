@@ -226,7 +226,7 @@ const Threadposts = () => {
                                                     userRole={currentUser.role}
                                                     type="threadpost"
                                                     threadPost={threadpost}
-                                                    threadId={thread.id}
+                                                    thread={thread}
                                                 />
                                             }
 

@@ -1,55 +1,53 @@
-// vehicleService.js
-
 import axiosInstance from '../interceptor/tokenInterceptor';
 import { jwtDecode } from 'jwt-decode';
-import { useState } from 'react';
 
-
-const vehicleService = {
-
-    // Método para obtener todos los vehículos
+const AuthService = {
+    // Método para iniciar sesión
     login: async (user) => {
-        console.log(user)
         try {
             const response = await axiosInstance.post('/auth/signin', user);
-
             return response.data;
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
-            return [];
+            throw new Error('Error al iniciar sesión');
         }
     },
-    // Método para obtener un vehículo por su ID
+
+    // Método para registrar usuario
     register: async (user) => {
         try {
-            const response = await axiosInstance.post(`auth/signup`, user);
+            const response = await axiosInstance.post('/auth/signup', user);
             return response.data;
         } catch (error) {
-            console.error(`Error al registrar:`, error);
-            return null;
+            console.error('Error al registrar:', error);
+            throw new Error('Error al registrar');
         }
     },
 
-    logout: async (user) => {
-        try{
-            localStorage.removeItem("token");
-        } catch (error){
-            console.error("Error al obtener al usuario:", error);
-            return null;
+    // Método para cerrar sesión
+    logout: async () => {
+        try {
+            localStorage.removeItem('token');
+        } catch (error) {
+            console.error('Error al cerrar sesión:', error);
+            throw new Error('Error al cerrar sesión');
         }
     },
 
+    // Método para obtener el usuario actual desde el token
     getCurrentUser: () => {
-        try{
-            const token = localStorage.getItem("token");
-            if(token){
+        try {
+            const token = localStorage.getItem('token');
+            if (token) {
                 return jwtDecode(token);
+            } else {
+                return null; // Devolver null si no hay token
             }
-        } catch (error){
-            console.error("Error al obtener al usuario:", error);
-            return false;
+        } catch (error) {
+            console.error('Error al obtener al usuario:', error);
+            throw new Error('Error al obtener al usuario');
         }
     }
 };
 
-export default vehicleService;
+export default AuthService;

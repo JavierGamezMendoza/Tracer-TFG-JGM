@@ -1,27 +1,24 @@
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from './login.module.css';
 import { Link, useNavigate } from "react-router-dom";
 import authService from '../../services/authService';
-import { Navigate } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = ({ actualizarUsuario }) => {
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [authenticated, setAuthenticated] = useState(false);
     const navigate = useNavigate();
-
 
     const isAuthenticated = (authenticated) => {
         setAuthenticated(authenticated);
         actualizarUsuario(authenticated);
     };
 
-
-
     const login = async () => {
-        localStorage.removeItem("token")
+        localStorage.removeItem("token");
         try {
             const token = await authService.login({ "email": email, "password": password });
 
@@ -34,12 +31,21 @@ const Login = ({ actualizarUsuario }) => {
             }
         } catch (error) {
             console.error("Error al iniciar sesión:", error);
-            alert("Se ha producido un error");
+            toast.error("Wrong email or password", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     };
 
     return (
         <div className={`col-md-8 col-lg-8 col-xl-8 ${styles.container} m-auto`}>
+            <ToastContainer />
             <div className="row d-flex align-items-center h-100 mt-4">
                 <div className={`${styles.banner} d-flex justify-content-center align-items-center d-none d-lg-flex col-lg-5 col-xl-5`}>
                     <h1>Tracer</h1>
@@ -67,12 +73,10 @@ const Login = ({ actualizarUsuario }) => {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                        <div className="d-flex justify-content-between align-items-center">
-                        </div>
+                        <div className="d-flex justify-content-between align-items-center"></div>
                         <div className="text-center text-lg-start mt-4 pt-2">
                             <button type="submit" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary">Login</button>
-                            <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <Link to="/register"
-                                className="link-primary">Register</Link></p>
+                            <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <Link to="/register" className="link-primary">Register</Link></p>
                         </div>
                     </form>
                 </div>

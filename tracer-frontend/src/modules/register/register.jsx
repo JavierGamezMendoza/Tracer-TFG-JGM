@@ -3,6 +3,7 @@ import styles from './register.module.css';
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import authService from '../../services/authService';
+import { toast } from "react-toastify";
 
 const Register = ({ actualizarUsuario }) => {
     const [username, setUsername] = useState("");
@@ -50,9 +51,17 @@ const Register = ({ actualizarUsuario }) => {
                 isAuthenticated(true);
                 navigate("/");
             }
-        } catch (error) {
-            console.error("Error al registrar:", error);
-            alert("Se ha producido un error");
+        }  catch (error) {
+            console.error("Error on register: ", error);
+            toast.error("Error on register", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }
     };
 
