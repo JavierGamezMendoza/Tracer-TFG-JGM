@@ -3,7 +3,7 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Image from 'react-bootstrap/Image';
 import { Link } from 'react-router-dom'; // Importa Link desde react-router-dom
-import authService from '../../services/authService'
+import styles from './navbar.module.css';
 
 const MyNavbar = ({currentUser}) => {
     const [expanded, setExpanded] = useState(false);
@@ -11,7 +11,7 @@ const MyNavbar = ({currentUser}) => {
     return (
         <Navbar bg="light" expand="lg" expanded={expanded}>
             <Container fluid>
-                <Navbar.Brand href="#home" className="ms-4">Tracer</Navbar.Brand>
+                <Navbar.Brand href="#home" className={`ms-4 ${styles.title}`}>Tracer</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")} />
                 <Navbar.Collapse id="basic-navbar-nav" className="me-4 justify-content-end">
                     <Nav className="ms-auto">

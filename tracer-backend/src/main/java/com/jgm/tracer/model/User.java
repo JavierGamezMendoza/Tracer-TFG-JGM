@@ -77,7 +77,7 @@ public class User implements UserDetails {
 
     @ManyToMany
     @JoinTable(
-            name = "UserVehile",
+            name = "UserVehicle",
             joinColumns = @JoinColumn(name = "userId"),
             inverseJoinColumns = @JoinColumn(name = "vehicleId")
     )

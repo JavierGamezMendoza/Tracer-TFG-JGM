@@ -69,7 +69,7 @@ const Register = ({ actualizarUsuario }) => {
         <div className={`col-md-8 col-lg-8 col-xl-8 h-100 m-auto`}>
             <div className={`${styles.container} row d-flex align-items-center mt-4`}>
                 <div className={`${styles.banner} d-flex justify-content-center align-items-center d-none d-lg-flex col-lg-5 col-xl-5`}>
-                    <h1>Tracer</h1>
+                    <h1 className={styles.title}>Tracer</h1>
                 </div>
                 <div className="col-md-12 col-lg-7 col-xl-5 offset-xl-1">
                     <h2 className="text-center">Register</h2>

@@ -44,7 +44,7 @@ public class InitializationData implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
-
+/**
         // Usuario 1 - Rol USER
         User usuario1 = new User();
         usuario1.setUsername("Alice_Johnson");
@@ -79,7 +79,7 @@ public class InitializationData implements CommandLineRunner{
         usuarioRepository.save(usuario3);
 
 
-        Vehicle vehicle1 = new Vehicle();
+ Vehicle vehicle1 = new Vehicle();
         vehicle1.setBrand("BMW");
         vehicle1.setModel("E30");
         vehicle1.setCreationDate(LocalDate.of(1994, 1, 1));
@@ -121,5 +121,6 @@ public class InitializationData implements CommandLineRunner{
         threadpost1.setMessage("You should specify the problem");
         threadpost1.setThread(threadRepository.getReferenceById(2L));
         threadpostRepository.save(threadpost1);
+         */
     }
 }
