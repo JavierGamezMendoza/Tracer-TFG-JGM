@@ -38,11 +38,7 @@ const AuthService = {
     getCurrentUser: () => {
         try {
             const token = localStorage.getItem('token');
-            if (token) {
-                return jwtDecode(token);
-            } else {
-                return null; // Devolver null si no hay token
-            }
+            return jwtDecode(token);
         } catch (error) {
             console.error('Error al obtener al usuario:', error);
             throw new Error('Error al obtener al usuario');

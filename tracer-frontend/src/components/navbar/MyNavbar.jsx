@@ -3,7 +3,8 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Image from 'react-bootstrap/Image';
 import { Link } from 'react-router-dom'; // Importa Link desde react-router-dom
-import styles from './navbar.module.css';
+import authService from '../../services/authService'
+import styles from './navbar.module.css'
 
 const MyNavbar = ({currentUser}) => {
     const [expanded, setExpanded] = useState(false);

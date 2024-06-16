@@ -15,13 +15,17 @@ import Profile from "./modules/profile/profile";
 
 function App() {
 
-  const [authenticated, setAuthenticated] = useState(true);
+  const [authenticated, setAuthenticated] = useState(localStorage.getItem('token') ? true : false);
   const [currentUser, setCurrentUser] = useState(true);
 
   const fetchCurrentUser = () => {
-    const user = authService.getCurrentUser();
-    console.log(user)
-    setCurrentUser(user);
+    try {
+      const user = authService.getCurrentUser();
+      console.log(user)
+      setCurrentUser(user);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const actualizarUsuario = (nuevoUsuario) => {
@@ -38,7 +42,7 @@ function App() {
       {/* Renderizar el navbar solo si el usuario está autenticado */}
 
       <BrowserRouter>
-        {authenticated && <MyNavbar currentUser={currentUser}/>}
+        {authenticated && <MyNavbar currentUser={currentUser} />}
         <Routes>
           <Route path="/" element={<Guardian><Feed /></Guardian>} />
           <Route path="/feed" element={<Guardian><Feed /></Guardian>} />
