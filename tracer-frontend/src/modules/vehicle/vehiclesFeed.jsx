@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import vehicleService from '../../services/vehicleService';
-import { Container, Card, Row, Button, Form, Alert } from 'react-bootstrap';
+import { Container, Card, Row, Col, Button, Form, FormControl, InputGroup, Alert } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';
 import Loading from '../../components/loading/loading';
 import styles from './vehicle.module.css';
-import { FaUser, FaCheck, FaPlus, FaTimes } from 'react-icons/fa';
+import { FaUser, FaCheck, FaPlus, FaTimes, FaSearch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import dateService from '../../services/dateService';
 import { AiFillMessage } from 'react-icons/ai';
 import threadService from '../../services/threadService';
 import authService from '../../services/authService';
-import { BsThreeDots } from 'react-icons/bs';
-import { Dropdown } from 'react-bootstrap';
-import BlockUserButton from '../../components/block-user-button/optionsButton';
-import UserService from '../../services/userService';
 import { IoShieldCheckmark } from 'react-icons/io5';
 import { Tooltip } from 'react-tooltip';
+import UserService from '../../services/userService';
 import OptionsButton from '../../components/block-user-button/optionsButton';
 
 const VehicleFeed = () => {
@@ -26,6 +23,7 @@ const VehicleFeed = () => {
   const [blockedUsers, setBlockedUsers] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [searchValue, setSearchValue] = useState('');
   const [formData, setFormData] = useState({
     title: '',
     message: ''
@@ -36,9 +34,9 @@ const VehicleFeed = () => {
   });
 
   const fetchCurrentUser = async () => {
-    const newCurrentUser = authService.getCurrentUser()
+    const newCurrentUser = authService.getCurrentUser();
     setCurrentUser(newCurrentUser);
-  }
+  };
 
   const fetchVehicle = async () => {
     const vehicleById = await vehicleService.getVehicleById(id);
@@ -92,10 +90,10 @@ const VehicleFeed = () => {
     if (validateForm()) {
       try {
         const thread = await threadService.addThread({
-          "creatorId": currentUser.id,
-          "vehicleId": vehicle.id,
-          "title": formData.title,
-          "message": formData.message
+          creatorId: currentUser.id,
+          vehicleId: vehicle.id,
+          title: formData.title,
+          message: formData.message
         });
 
         setFormData({
@@ -123,6 +121,18 @@ const VehicleFeed = () => {
     });
   };
 
+  const handleSearch = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  const filteredThreads = threads ? threads.filter(thread => {
+    return (
+      thread.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+      thread.message.toLowerCase().includes(searchValue.toLowerCase()) ||
+      thread.creator.username.toLowerCase().includes(searchValue.toLowerCase())
+    );
+  }) : [];
+
   if (!vehicle) {
     return <Loading />;
   }
@@ -130,56 +140,72 @@ const VehicleFeed = () => {
   return (
     <Container>
       <h2 className='mt-4'>{vehicle.brand} - {vehicle.model}</h2>
+      <InputGroup className="mb-3 mt-4">
+        <FormControl
+          placeholder="Search threads..."
+          aria-label="Search threads..."
+          aria-describedby="basic-addon2"
+          value={searchValue}
+          onChange={handleSearch}
+        />
+        <InputGroup.Text>
+          <FaSearch />
+        </InputGroup.Text>
+      </InputGroup>
       {showForm ? (
         <Row className="justify-content-center mt-3">
-          <Card>
-            <Card.Body>
-              <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Title</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter title"
-                    name="title"
-                    value={formData.title}
-                    onChange={handleChange}
-                    isInvalid={!!formErrors.title}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {formErrors.title}
-                  </Form.Control.Feedback>
-                </Form.Group>
-                <Form.Group className="mb-3">
-                  <Form.Label>Message</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    placeholder="Enter message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    isInvalid={!!formErrors.message}
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {formErrors.message}
-                  </Form.Control.Feedback>
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                  Submit
-                </Button>
-                <Button variant="secondary" onClick={handleCancel} className="ms-2">
-                  Cancel <FaTimes className='ms-1' />
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
+          <Col xs={12} md={8}>
+            <Card>
+              <Card.Body>
+                <Form onSubmit={handleSubmit}>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter title"
+                      name="title"
+                      value={formData.title}
+                      onChange={handleChange}
+                      isInvalid={!!formErrors.title}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {formErrors.title}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Message</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      placeholder="Enter message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      isInvalid={!!formErrors.message}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      {formErrors.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
+                  <Button variant="secondary" onClick={handleCancel} className="ms-2">
+                    Cancel <FaTimes className='ms-1' />
+                  </Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          </Col>
         </Row>
       ) : (
         <Row className="mt-3">
-          <Button onClick={toggleForm} className='d-flex align-items-center justify-content-center'>Add Thread <FaPlus className='ms-2' /></Button>
+          <Col xs={12} md={8}>
+            <Button onClick={toggleForm} className='d-flex align-items-center justify-content-center'>Add Thread <FaPlus className='ms-2' /></Button>
+          </Col>
         </Row>
       )}
-      {threads.map((thread, index) => (
+      {filteredThreads.map((thread, index) => (
         !blockedUsers.some(user => user.id === thread.creator.id) ? (
           <Row className='justify-content-center align-items-center mt-3' key={index} xs={1} md={1} lg={1} xl={12}>
             <Card>
@@ -251,39 +277,34 @@ const VehicleFeed = () => {
               </Card.Body>
             </Card>
           </Row>
+        ) : (
+          <Row className='justify-content-center align-items-center mt-3' key={index} xs={1} md={1} lg={1} xl={12}>
+            <Card>
+              <Card.Body>
+                <div className='d-flex justify-content-end'>
+                  <div className='d-flex align-items-center justify-content-end'>
+                    <Image
+                      className={styles.profilePic}
+                      src={thread.creator.profilePic}
+                      roundedCircle
+                      style={{ width: 20, height: 20 }}
+                    />
+                    <div className='ms-2'> {thread.creator.username} </div>
+                    <OptionsButton
+                      mode="unblock"
+                      userId={thread.creator.id}
+                      fetch={fetchVehicle}
+                      userRole={currentUser.role}
+                    />
+                  </div>
+                </div>
+                <div className='mt-4 mb-4 bg-light p-4 rounded text-center'>
+                  This user is <b>blocked</b> and you will not see their communications.
+                </div>
+              </Card.Body>
+            </Card>
+          </Row>
         )
-          :
-          (
-            <Row className='justify-content-center align-items-center mt-3' key={index} xs={1} md={1} lg={1} xl={12}>
-              <Card>
-                <Card.Body>
-                  <div className='d-flex justify-content-end'>
-                    <div className='d-flex align-items-center justify-content-end'>
-                      <Image
-                        className={styles.profilePic}
-                        src={thread.creator.profilePic}
-                        roundedCircle
-                        style={{ width: 20, height: 20 }}
-                      />
-                      <div className='ms-2'> {thread.creator.username} </div>
-                      <BlockUserButton 
-                        mode="unblock" 
-                        userId={thread.creator.id} 
-                        fetch={fetchVehicle} 
-                        userRole={currentUser.role}
-                      />
-                    </div>
-                  </div>
-                  <div className='mt-4 mb-4 bg-light p-4 rounded text-center'>
-                    This user is <b>blocked</b> and you will not see their communications.
-                  </div>
-                </Card.Body>
-              </Card>
-            </Row>
-          )
-
-
-
       ))}
     </Container>
   );

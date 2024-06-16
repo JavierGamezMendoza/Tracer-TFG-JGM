@@ -12,16 +12,16 @@ const MyNavbar = ({currentUser}) => {
     return (
         <Navbar bg="light" expand="lg" expanded={expanded}>
             <Container fluid>
-                <Navbar.Brand href="#home" className={`ms-4 ${styles.title}`}>Tracer</Navbar.Brand>
+                <Navbar.Brand as={Link} to="/" className={`ms-4 ${styles.title}`}>Tracer</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")} />
                 <Navbar.Collapse id="basic-navbar-nav" className="me-4 justify-content-end">
                     <Nav className="ms-auto">
-                        <Nav.Link as={Link} to="/">Inicio</Nav.Link>
-                        <Nav.Link as={Link} to="/users">Usuarios</Nav.Link>
+                        <Nav.Link as={Link} to="/">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/users">Users</Nav.Link>
                         <NavDropdown
                             title={<Image src={currentUser?.profilePic} roundedCircle width="20" height="20" />}
                             id="basic-nav-dropdown"
-                            className="custom-dropdown d-sm-none d-lg-block"
+                            className="custom-dropdown d-none d-lg-block"
                             align="end"
                         >
                             <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
