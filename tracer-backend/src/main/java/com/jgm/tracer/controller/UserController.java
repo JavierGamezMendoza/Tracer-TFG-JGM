@@ -68,7 +68,11 @@ public class UserController {
             @PathVariable(name = "id") final Long id,
             @AuthenticationPrincipal User userDetails
     ){
-        userService.followThread(id, userDetails.getId());
+        try{
+            userService.followThread(id, userDetails.getId());
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     @PatchMapping("/unfollow/thread/{id}")
@@ -77,7 +81,12 @@ public class UserController {
             @PathVariable(name = "id") final Long id,
             @AuthenticationPrincipal User userDetails
     ){
-        userService.unFollowThread(id, userDetails.getId());
+
+        try{
+            userService.unFollowThread(id, userDetails.getId());
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     @PatchMapping("/follow/vehicle/{id}")
@@ -95,7 +104,7 @@ public class UserController {
             @PathVariable(name = "id") final Long id,
             @AuthenticationPrincipal User userDetails
     ){
-        userService.unFollowUser(id, userDetails.getId());
+        userService.unFollowVehicle(id, userDetails.getId());
     }
 
     @PatchMapping("/follow/{id}")

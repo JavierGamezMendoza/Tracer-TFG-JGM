@@ -48,6 +48,7 @@ const UserService = {
   unFollowVehicle: async (id) => {
     try {
       const response = await axiosInstance.patch(`/users/unfollow/vehicle/${id}`);
+      console.log(response)
       return response.data;
     } catch (error) {
       console.error(`Error al dejar de seguir el vehiculo con ID ${id}:`, error);
