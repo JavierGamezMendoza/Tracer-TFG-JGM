@@ -1,0 +1,38 @@
+/* MyComponent.module.css */
+.checkbox {
+    border: 2px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #eee;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border: none;
+  }
+  
+  .checkboxFavorites {
+    padding: 8px;
+    border-radius: 15px;
+    background-color:#eee;
+    color: rgb(199, 199, 199);
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .checkbox:hover {
+    color: rgb(179, 0, 0);
+  }
+  .checkboxFavorites:hover{
+    color: rgb(173, 62, 62);
+  }
+  
+  
+  .checkbox svg {
+    width: 15px;
+    height: 15px;
+  }
+  

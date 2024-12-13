@@ -1,0 +1,25 @@
+.profilePic{
+    width: 25px;
+}
+
+.openThread{
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+.closedThread{
+    border: none;
+    background-color: rgb(255, 223, 255);
+    color: rgb(126, 50, 126);
+    border-radius: 15px;
+}
+
+.link{
+    text-decoration: none;
+}
+
+.reliable {
+    fill: rgb(228, 175, 0);
+}

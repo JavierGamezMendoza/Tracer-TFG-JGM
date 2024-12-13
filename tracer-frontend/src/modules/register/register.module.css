@@ -1,0 +1,19 @@
+.banner {
+    color: white;
+    height: 100%;
+    border-radius: 0px 40px 40px 0px;
+    background: rgb(255, 146, 114);
+    background: linear-gradient(133deg, rgba(255, 146, 114, 1) 0%, rgba(91, 99, 245, 1) 100%);
+}
+
+.container{
+    height: 80vh;
+    box-shadow: 1px 1px 15px 1px #ccc;
+}
+
+
+.title {
+    font-family: "Courgette", cursive !important;
+    font-weight: bolder;
+    font-style: normal;
+}
